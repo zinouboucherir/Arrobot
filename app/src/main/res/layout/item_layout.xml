@@ -2,7 +2,8 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="180dp"
+    android:background="#FFFFFF"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
@@ -11,16 +12,17 @@
     card_view:cardCornerRadius="15dp"
     card_view:cardElevation="5dp"
     card_view:cardUseCompatPadding="true"
-    card_view:contentPadding="15dp">
+    card_view:contentPadding="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="119dp">
+        android:layout_height="match_parent"
+        android:background="@drawable/item">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
-            android:layout_height="153dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="16dp"
             card_view:layout_constraintBottom_toBottomOf="parent"
@@ -33,13 +35,13 @@
                 android:id="@+id/nom1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/abel"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/nunito_extralight"
                 android:text="TextView"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 card_view:layout_constraintEnd_toEndOf="parent"
-                card_view:layout_constraintHorizontal_bias="0.546"
+                card_view:layout_constraintHorizontal_bias="0.455"
                 card_view:layout_constraintStart_toEndOf="@+id/imageView4"
                 card_view:layout_constraintTop_toTopOf="@+id/imageView4" />
 
@@ -48,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:fontFamily="@font/nunito_extralight"
+                android:fontFamily="@font/abel"
                 android:text="TextView"
                 android:textColor="#000000"
                 android:textSize="18sp"
@@ -59,15 +61,14 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageView4"
-                android:layout_width="94dp"
-                android:layout_height="93dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
+                android:layout_width="96dp"
+                android:layout_height="85dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
                 android:src="@drawable/plante1"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintStart_toStartOf="parent"
-                card_view:layout_constraintTop_toTopOf="parent"
-                card_view:layout_constraintVertical_bias="0.45" />
+                card_view:layout_constraintTop_toTopOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
