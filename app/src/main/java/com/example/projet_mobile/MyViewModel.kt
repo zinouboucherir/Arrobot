@@ -8,10 +8,14 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
     val dao = PlanteDB.getDatabase(application).myDao()
     var allPlante= MutableLiveData<List<Plante>>()
     var certainsPlante = MutableLiveData<List<Plante>>()
+    var frequenceNumber=0
     fun partialNomPays(nom: String) {
         Thread {certainsPlante.postValue(dao.loadPartialName(nom).toList()) }.start()
     }
     fun allPlante() {
         Thread { allPlante.postValue(dao.loadAll().toList()) }.start()
+    }
+    fun insertPlante(plante: Plante) {
+        Thread { dao.addPlante(plante) }.start()
     }
 }

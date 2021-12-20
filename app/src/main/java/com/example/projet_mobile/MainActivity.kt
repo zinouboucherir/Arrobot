@@ -1,15 +1,17 @@
 package com.example.projet_mobile
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.database.CursorWindow
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projet_mobile.databinding.ActivityMainBinding
+import java.lang.reflect.Field
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var adapter: RecycleAdapter
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.hasFixedSize() /* pour améliorer les pérformances*/
         recyclerView.layoutManager = LinearLayoutManager(this)
         val model= ViewModelProvider(this).get(MyViewModel::class.java)
+
         model.allPlante()
         model.allPlante.observe(this){
             adapter = RecycleAdapter(it.toMutableList())
@@ -53,5 +56,9 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        binding.addBtn.setOnClickListener {
+            val intent = Intent(this, AddActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
