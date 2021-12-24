@@ -7,10 +7,11 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Frequence(
-    val NbrFois:Int,
-    val Par:String,
-    val saison:String,
-    val planteId:Int
+    var NbrFois:Int,
+    var Par:Int,
+    var MoisDebut:Int,
+    var MoisFin:Int,
+    var planteId:Int
 )
 {
     @PrimaryKey(autoGenerate = true)

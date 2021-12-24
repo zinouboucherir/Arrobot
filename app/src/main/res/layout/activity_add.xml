@@ -6,119 +6,217 @@
     android:layout_height="match_parent"
     tools:context=".AddActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text"
-        android:layout_width="316dp"
-        android:layout_height="83dp"
-        android:layout_marginTop="40dp"
-        android:hint="Nom1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nom1"
-            android:layout_width="match_parent"
-            android:layout_height="53dp"
-            android:padding="12dp"
-            android:textColorLink="#2E6A9D" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/text1"
-        android:layout_width="316dp"
-        android:layout_height="83dp"
-        android:hint="Nom2"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text"
-        app:layout_constraintVertical_bias="0.013">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nom2"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="53dp"
-            android:padding="12dp"
-            android:textColorLink="#2E6A9D" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="0dp"
+            android:layout_weight="1"
 
-    <Button
-        android:id="@+id/arrSimple"
-        android:layout_width="182dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="16dp"
-        android:text="Date arrosage simple"
-        app:layout_constraintBottom_toBottomOf="@+id/dateSimple"
+            android:background="#8FEFB6" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+
+            android:background="#E6E2E2" />
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="133dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.716"
-        app:layout_constraintStart_toEndOf="@+id/dateSimple"
-        app:layout_constraintTop_toTopOf="@+id/dateSimple"
-        app:layout_constraintVertical_bias="0.51" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo1" />
 
-    <Button
-        android:id="@+id/arrNutr"
-        android:layout_width="179dp"
-        android:layout_height="56dp"
-        android:text="Date arrosage nutriment"
-        app:layout_constraintBottom_toBottomOf="@+id/dateNutr"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="353dp"
+        android:layout_height="583dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.716"
-        app:layout_constraintStart_toEndOf="@+id/dateNutr"
-        app:layout_constraintTop_toTopOf="@+id/dateNutr" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/dateSimple"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="Date"
-        app:layout_constraintStart_toStartOf="@+id/text1"
-        app:layout_constraintTop_toBottomOf="@+id/text1" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="612dp">
 
-    <TextView
-        android:id="@+id/dateNutr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:text="Date"
-        app:layout_constraintStart_toStartOf="@+id/dateSimple"
-        app:layout_constraintTop_toBottomOf="@+id/dateSimple" />
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/nunito_light"
+                android:text="Nouvelle Plante"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text"
+                android:layout_width="290dp"
+                android:layout_height="54dp"
+                android:layout_marginTop="76dp"
+                android:hint="Nom du Plante (Français)"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nom1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:padding="12dp"
+                    android:textColorLink="#2E6A9D" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text1"
+                android:layout_width="290dp"
+                android:layout_height="54dp"
+                android:hint="Nom du Plante (Latin)"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text"
+                app:layout_constraintVertical_bias="0.051">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nom2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:padding="12dp"
+                    android:textColorLink="#2E6A9D" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/arrSimple"
+                android:layout_width="89dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/roundstyle"
+                android:drawableLeft="@drawable/ic_baseline_date_range_24"
+                android:fontFamily="@font/nunito_light"
+                android:hapticFeedbackEnabled="false"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Date"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/dateSimple"
+                app:layout_constraintHorizontal_bias="0.482"
+                app:layout_constraintStart_toStartOf="@+id/dateSimple"
+                app:layout_constraintTop_toBottomOf="@+id/dateSimple" />
+
+            <Button
+                android:id="@+id/arrNutr"
+                android:layout_width="89dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/roundstyle"
+                android:drawableLeft="@drawable/ic_baseline_date_range_24"
+                android:fontFamily="@font/nunito_light"
+                android:hapticFeedbackEnabled="false"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Date"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/dateNutr"
+                app:layout_constraintStart_toStartOf="@+id/dateNutr"
+                app:layout_constraintTop_toBottomOf="@+id/dateNutr" />
+
+            <TextView
+                android:id="@+id/dateSimple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/nunito_light"
+                android:text="Dernier arrosage simple"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text1" />
+
+            <TextView
+                android:id="@+id/dateNutr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/nunito_light"
+                android:text="Dernier arrosage nutriments"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/arrSimple" />
+
+            <Button
+                android:id="@+id/ajouterImage"
+                android:layout_width="171dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/roundstyle"
+                android:drawableLeft="@drawable/ic_baseline_image_24"
+                android:fontFamily="@font/nunito_light"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Ajouter Image"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.502"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/arrNutr" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/planteimage"
+                android:layout_width="356dp"
+                android:layout_height="148dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/plante1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ajouterImage"
+                tools:srcCompat="@tools:sample/avatars" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/ajouterPlante"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="149dp"
+        android:layout_height="46dp"
+        android:background="@drawable/roundstyle"
+        android:drawableLeft="@drawable/ic_add_white"
+        android:fontFamily="@font/nunito_light"
+        android:hapticFeedbackEnabled="false"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
         android:text="Ajouter"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/planteimage" />
-
-    <Button
-        android:id="@+id/ajouterImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Ajouter Image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/arrNutr" />
-
-    <ImageView
-        android:id="@+id/planteimage"
-        android:layout_width="330dp"
-        android:layout_height="209dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ajouterImage"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

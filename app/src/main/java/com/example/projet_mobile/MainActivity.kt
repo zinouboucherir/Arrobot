@@ -22,11 +22,11 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById(R.id.recyclerView) as RecyclerView
         recyclerView.hasFixedSize() /* pour améliorer les pérformances*/
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val model= ViewModelProvider(this).get(MyViewModel::class.java)
 
+        val model= ViewModelProvider(this).get(MyViewModel::class.java)
         model.allPlante()
         model.allPlante.observe(this){
-            adapter = RecycleAdapter(it.toMutableList())
+            adapter = RecycleAdapter(this,it.toMutableList())
             recyclerView.adapter = adapter
         }
         binding.search.addTextChangedListener(object : TextWatcher {
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable) {
                 model.partialNomPays(s.toString())
                 model.certainsPlante.observe(this@MainActivity) {
-                    adapter = RecycleAdapter(it.toMutableList())
+                    adapter = RecycleAdapter(this@MainActivity,it.toMutableList())
                     recyclerView.adapter = adapter
                 }
             }
