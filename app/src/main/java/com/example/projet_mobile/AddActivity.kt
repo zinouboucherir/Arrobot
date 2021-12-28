@@ -68,9 +68,10 @@ class AddActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // use binding
         val binding = ActivityAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        // use viewmodel pour stocker les données d'une plante
         var modelPlant = ViewModelProvider(this).get(PlantViewModel::class.java)
 /////////////////////////////////// datepicker for date d'arrosage simple ///////////////////////////////////
         val c = Calendar.getInstance()
@@ -95,12 +96,12 @@ class AddActivity : AppCompatActivity() {
                         }
                         date = "$dd-$mm-$mYear"
                         val LocaldateSimple = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                        dateSimple = Date.from(Instant.from(LocaldateSimple.atStartOfDay(ZoneId.of("GMT"))))
+                      // dateSimple = Date.from(Instant.from(LocaldateSimple.atStartOfDay(ZoneId.of("GMT"))))
                         // utilisation de view model pour changer la date
-                        modelPlant.plante.value?.dateDernierArrSimple=dateSimple
+                        modelPlant.plante.value?.dateDernierArrSimple=LocaldateSimple
                         // observer  pour changer la date à afficher
                         modelPlant.plante.observe(this) {
-                            binding.dateSimple.setText(modelPlant.plante.value?.dateDernierArrSimple?.toLocaleString())
+                            binding.dateSimple.setText(modelPlant.plante.value?.dateDernierArrSimple?.toString())
                         }
 
                     }, year, month, day
@@ -130,13 +131,13 @@ class AddActivity : AppCompatActivity() {
                         mm1= "0${(mMonth + 1)}"
                     }
                     date1 = "$dd1-$mm1-$mYear"
-                    val LocaldateSimple = LocalDate.parse(date1, DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                    dateNutr = Date.from(Instant.from(LocaldateSimple.atStartOfDay(ZoneId.of("GMT"))))
+                    val LocaldateNuttr = LocalDate.parse(date1, DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                    //dateNutr = Date.from(Instant.from(LocaldateSimple.atStartOfDay(ZoneId.of("GMT"))))
                     // utilisation de view model pour changer la date
-                    modelPlant.plante.value?.dateDernierArrNutr=dateNutr
+                    modelPlant.plante.value?.dateDernierArrNutr=LocaldateNuttr
                     // observer  pour changer la date à afficher
                     modelPlant.plante.observe(this) {
-                        binding.dateNutr.setText(modelPlant.plante.value?.dateDernierArrNutr?.toLocaleString())
+                        binding.dateNutr.setText(modelPlant.plante.value?.dateDernierArrNutr?.toString())
                     }
                 }, year1, month1, day1
             )
@@ -153,22 +154,31 @@ class AddActivity : AppCompatActivity() {
 
             val n1=binding.nom1.text.toString().trim()
             val n2=binding.nom2.text.toString().trim()
-            if ((n1.isEmpty() && n2.isEmpty()) ) {
-                Toast.makeText(this, "Entrez au mois un nom", Toast.LENGTH_SHORT).show()
-            } else {
+            // utilisation de view model pour changer les noms
+            modelPlant.plante.value?.nom1=n1
+            modelPlant.plante.value?.nom2=n2
+            // utilisation de view model (observer) pour récupérer les information de la plante à inserer
+            modelPlant.plante.observe(this)
+            {
+                    // utilisation de view model pour accéder à la fonction d'insertion
+                    val model= ViewModelProvider(this).get(MyViewModel::class.java)
+                    modelPlant.plante.observe(this) {
+                        if ((it.nom1.isEmpty() && it.nom2.isEmpty()) ) {
+                            Toast.makeText(this, "Entrez au mois un nom", Toast.LENGTH_SHORT).show()
+                        }
+                        else if (it.dateDernierArrSimple==null || it.dateDernierArrNutr==null)
+                        {
+                            Toast.makeText(this, "Entrez les dates de dernier arrosage (simple et nutriments", Toast.LENGTH_SHORT).show()
+                        }
+                        else
+                        {
+                            model.insertPlante(modelPlant.plante.value!!)
+                            Toast.makeText(this, "Plante inséré avec succées", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                        }
+                    }
 
-                // utilisation de view model pour changer les noms
-                modelPlant.plante.value?.nom1=n1
-                modelPlant.plante.value?.nom2=n2
-
-                // utilisation de view model pour accéder à la fonction d'insertion
-                val model= ViewModelProvider(this).get(MyViewModel::class.java)
-                modelPlant.plante.observe(this) {
-                    model.insertPlante(modelPlant.plante.value!!)
-                }
-                Toast.makeText(this, "Plante inséré avec succées", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
             }
         }
 

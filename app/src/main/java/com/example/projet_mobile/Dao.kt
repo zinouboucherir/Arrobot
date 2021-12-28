@@ -6,6 +6,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import java.sql.Date
 
 @Dao
 interface Dao {
@@ -26,4 +27,7 @@ interface Dao {
 
     @Query("SELECT * FROM Frequence where (planteId=:id and MoisDebut <= :EndB and :StartB <= MoisFin and MoisDebut <= MoisFin and :StartB <= :EndB)")
     fun verifyIntersect(id:Int,StartB:Int,EndB:Int):Array<Frequence>
+
+    @Query("SELECT * FROM Plante natural join Frequence where :date between MoisDebut and MoisFin")
+    fun PlantFrequence(date:Int):Array<FullInfo>
 }

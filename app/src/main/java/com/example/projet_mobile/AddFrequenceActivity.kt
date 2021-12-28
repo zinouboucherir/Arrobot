@@ -23,7 +23,6 @@ class AddFrequenceActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //use binfing
         val binding = ActivityAddFrequenceBinding.inflate(layoutInflater)
         setContentView(binding.root)
         //récupérer les information de la plante séléctionné

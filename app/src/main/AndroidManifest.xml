@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.projet_mobile">
-
-    <application
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"></uses-permission>    <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo1"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Projet_mobile">
-        <activity android:name=".AddFrequenceActivity"></activity>
+        <service
+            android:name=".MyService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <activity android:name=".AlarmActivity" />
+        <activity android:name=".PlantArroseActivity" />
+        <activity android:name=".AddFrequenceActivity" />
         <activity android:name=".AddActivity" />
         <activity android:name=".MainActivity" />
         <activity
@@ -22,9 +28,9 @@
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
+    <meta-data
+        android:name="preloaded_fonts"
+        android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

@@ -4,12 +4,15 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import java.sql.Date
+import java.util.*
 
 class MyViewModel(application: Application) : AndroidViewModel(application) {
     val dao = PlanteDB.getDatabase(application).myDao()
     var allPlante= MutableLiveData<List<Plante>>()
     var certainsPlante = MutableLiveData<List<Plante>>()
     var freq=MutableLiveData<List<Frequence>>()
+    var plantFreq=MutableLiveData<List<FullInfo>>()
     fun partialNomPays(nom: String) {
         Thread {certainsPlante.postValue(dao.loadPartialName(nom).toList()) }.start()
     }
@@ -32,5 +35,8 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
         }
         count.start()
         count.join()
+    }
+    fun PlantFrequence(date:Int) {
+        Thread { plantFreq.postValue(dao.PlantFrequence(date).toList()) }.start()
     }
 }

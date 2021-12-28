@@ -12,8 +12,8 @@ import java.util.*
 data class Plante (
         var nom1:String,
         var nom2:String,
-        var dateDernierArrSimple:Date,
-        var dateDernierArrNutr:Date,
+        var dateDernierArrSimple:LocalDate?,
+        var dateDernierArrNutr:LocalDate?,
         var arrose:Boolean,
         var nbrFrequence:Int,
         var image:String

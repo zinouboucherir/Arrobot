@@ -25,13 +25,13 @@ class RecycleAdapter(val context: Context,val plantes: MutableList<Plante>): Rec
         holder.binding.imageView4.setImageURI(Uri.parse(plantes[position].image))
        if(plantes[position].nbrFrequence==0)
        {
-           holder.binding.frequence.setTextColor(Color.parseColor("#FF0000"))
-           holder.binding.frequence.text="Aucune fréqunece pour cette plante !"
+           holder.binding.frequence.setTextColor(Color.parseColor("#FF716E"))
+           holder.binding.frequence.text="* Aucune fréqunece pour cette plante !"
        }
         else
        {
-           holder.binding.frequence.setTextColor(Color.parseColor("#00FF00"))
-           holder.binding.frequence.text="il y a ${plantes[position].nbrFrequence} fréquence pour cette plante"
+           holder.binding.frequence.setTextColor(Color.parseColor("#4D82EA"))
+           holder.binding.frequence.text="* il y a ${plantes[position].nbrFrequence} fréquence pour cette plante"
        }
         holder.binding.addBtn2.setOnClickListener {
                 val intent = Intent(context, AddFrequenceActivity::class.java)

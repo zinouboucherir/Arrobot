@@ -2,15 +2,19 @@ package com.example.projet_mobile
 
 import android.content.Intent
 import android.database.CursorWindow
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projet_mobile.databinding.ActivityMainBinding
 import java.lang.reflect.Field
+import java.time.LocalDate
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById(R.id.recyclerView) as RecyclerView
         recyclerView.hasFixedSize() /* pour améliorer les pérformances*/
         recyclerView.layoutManager = LinearLayoutManager(this)
-
         val model= ViewModelProvider(this).get(MyViewModel::class.java)
         model.allPlante()
         model.allPlante.observe(this){
@@ -38,7 +41,6 @@ class MainActivity : AppCompatActivity() {
 
                 // System.out.println("onTextChanged"+s);
             }
-
             override fun beforeTextChanged(
                 s: CharSequence, start: Int, count: Int,
                 after: Int
@@ -58,6 +60,14 @@ class MainActivity : AppCompatActivity() {
 
         binding.addBtn.setOnClickListener {
             val intent = Intent(this, AddActivity::class.java)
+            startActivity(intent)
+        }
+        binding.arrBtn.setOnClickListener {
+            val intent = Intent(this, PlantArroseActivity::class.java)
+            startActivity(intent)
+        }
+        binding.instalAlarm.setOnClickListener {
+            val intent = Intent(this, AlarmActivity::class.java)
             startActivity(intent)
         }
     }
