@@ -72,6 +72,41 @@ class DetailActivity : AppCompatActivity() {
             dpd.show()
         }
 
-        
+        /////////////////////////////// datepicker for date d'arrosage nutriment ///////////////////////////////////
+        val c1 = Calendar.getInstance()
+        val year1 = c1.get(Calendar.YEAR)
+        val month1 = c1.get(Calendar.MONTH)
+        val day1 = c1.get(Calendar.DAY_OF_MONTH)
+        var date1=""
+        var dd1=""
+        var mm1=""
+        binding.arrNutr.setOnClickListener{
+            val dpd = DatePickerDialog(this,
+                DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
+                    binding.dateNutr.setText(date1)
+                    dd1 = "$mDay"
+                    mm1 = "${(mMonth + 1)}"
+                    if (mDay <= 9) {
+                        dd1 = "0${mDay}"
+                    }
+                    if (mMonth <= 9) {
+                        mm1= "0${(mMonth + 1)}"
+                    }
+                    date1 = "$dd1-$mm1-$mYear"
+                    val LocaldateNuttr = LocalDate.parse(date1, DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                    //dateNutr = Date.from(Instant.from(LocaldateSimple.atStartOfDay(ZoneId.of("GMT"))))
+                    // utilisation de view model pour changer la date
+                    modelPlant.plante.value?.dateProchainArrNutr=LocaldateNuttr
+                    // observer  pour changer la date à afficher
+                    modelPlant.plante.observe(this) {
+                        binding.dateNutr.setText(modelPlant.plante.value?.dateProchainArrNutr?.toString())
+                    }
+                }, year1, month1, day1
+            )
+            dpd.getDatePicker().setMinDate(System.currentTimeMillis());
+            dpd.show()
+        }
+
+
     }
 }
