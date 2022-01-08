@@ -10,13 +10,14 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="353dp"
-        android:layout_height="583dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#00FFFFFF"
+        app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:cardBackgroundColor="#00FFFFFF"
-        app:cardCornerRadius="15dp">
+        app:layout_constraintVertical_bias="0.20999998">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -35,8 +36,180 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nomFrancais"
+                android:layout_width="290dp"
+                android:layout_height="54dp"
+                android:layout_marginTop="16dp"
+                android:hint="Nom du Plante (Français)"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nomfr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:padding="12dp"
+                    android:textColorLink="#2E6A9D" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nomLatin"
+                android:layout_width="290dp"
+                android:layout_height="54dp"
+                android:layout_marginTop="16dp"
+                android:hint="Nom du Plante (Français)"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nomFrancais">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nomL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:fontFamily="@font/nunito_extralight"
+                    android:padding="12dp"
+                    android:textColorLink="#2E6A9D" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/arrSimple"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/roundstyle"
+                android:drawableLeft="@drawable/ic_baseline_date_range_24"
+                android:enabled="false"
+                android:fontFamily="@font/nunito_light"
+                android:hapticFeedbackEnabled="false"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Modifier"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/dateSimple"
+                app:layout_constraintHorizontal_bias="0.482"
+                app:layout_constraintStart_toStartOf="@+id/dateSimple"
+                app:layout_constraintTop_toBottomOf="@+id/dateSimple" />
+
+            <Button
+                android:id="@+id/arrNutr"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/roundstyle"
+                android:drawableLeft="@drawable/ic_baseline_date_range_24"
+                android:enabled="false"
+                android:fontFamily="@font/nunito_light"
+                android:hapticFeedbackEnabled="false"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Modifier"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/dateNutr"
+                app:layout_constraintStart_toStartOf="@+id/dateNutr"
+                app:layout_constraintTop_toBottomOf="@+id/dateNutr" />
+
+            <TextView
+                android:id="@+id/dateSimple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/nunito_light"
+                android:text="Prochain arrosage simple"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nomLatin" />
+
+            <TextView
+                android:id="@+id/dateNutr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/nunito_light"
+                android:text="Prochain arrosage nutriments"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/arrSimple" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/planteimage"
+                android:layout_width="356dp"
+                android:layout_height="148dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/plante1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/arrNutr"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <Button
+                android:id="@+id/ajouterImage"
+                android:layout_width="171dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/roundstyle"
+                android:drawableLeft="@drawable/ic_baseline_image_24"
+                android:enabled="false"
+                android:fontFamily="@font/nunito_light"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Modifier l'image"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/planteimage" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
+    <Button
+        android:id="@+id/modifierPlante"
+        android:layout_width="149dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:background="@drawable/roundstyle"
+        android:drawableLeft="@drawable/ic_baseline_edit_24"
+        android:fontFamily="@font/nunito_light"
+        android:hapticFeedbackEnabled="false"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:text="Modifier"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintVertical_bias="0.507" />
+
+    <Button
+        android:id="@+id/sauvgarder"
+        android:layout_width="149dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:background="@drawable/roundstyle"
+        android:drawableLeft="@drawable/ic_baseline_save_alt_24"
+        android:fontFamily="@font/nunito_light"
+        android:hapticFeedbackEnabled="false"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:text="sauvgarder"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
