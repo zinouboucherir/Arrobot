@@ -29,5 +29,8 @@ interface Dao {
     fun verifyIntersect(id:Int,StartB:Int,EndB:Int):Array<Frequence>
 
     @Query("SELECT * FROM Plante natural join Frequence where :date between MoisDebut and MoisFin")
-    fun PlantFrequence(date:Int):Array<FullInfo>
+    fun PlantFrequence(date:Int):LiveData<Array<FullInfo>>
+
+    @Query("SELECT * FROM Plante natural join Frequence where :date between MoisDebut and MoisFin")
+    fun PlantFrequences(date:Int):Array<FullInfo>
 }

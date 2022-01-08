@@ -98,15 +98,15 @@ class AddActivity : AppCompatActivity() {
                         val LocaldateSimple = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"))
                       // dateSimple = Date.from(Instant.from(LocaldateSimple.atStartOfDay(ZoneId.of("GMT"))))
                         // utilisation de view model pour changer la date
-                        modelPlant.plante.value?.dateDernierArrSimple=LocaldateSimple
+                        modelPlant.plante.value?.dateProchainArrSimple=LocaldateSimple
                         // observer  pour changer la date à afficher
                         modelPlant.plante.observe(this) {
-                            binding.dateSimple.setText(modelPlant.plante.value?.dateDernierArrSimple?.toString())
+                            binding.dateSimple.setText(modelPlant.plante.value?.dateProchainArrSimple?.toString())
                         }
 
                     }, year, month, day
             )
-            dpd.getDatePicker().setMaxDate(System.currentTimeMillis());
+            dpd.getDatePicker().setMinDate(System.currentTimeMillis());
             dpd.show()
         }
 /////////////////////////////////// datepicker for date d'arrosage nutriment ///////////////////////////////////
@@ -134,14 +134,14 @@ class AddActivity : AppCompatActivity() {
                     val LocaldateNuttr = LocalDate.parse(date1, DateTimeFormatter.ofPattern("dd-MM-yyyy"))
                     //dateNutr = Date.from(Instant.from(LocaldateSimple.atStartOfDay(ZoneId.of("GMT"))))
                     // utilisation de view model pour changer la date
-                    modelPlant.plante.value?.dateDernierArrNutr=LocaldateNuttr
+                    modelPlant.plante.value?.dateProchainArrNutr=LocaldateNuttr
                     // observer  pour changer la date à afficher
                     modelPlant.plante.observe(this) {
-                        binding.dateNutr.setText(modelPlant.plante.value?.dateDernierArrNutr?.toString())
+                        binding.dateNutr.setText(modelPlant.plante.value?.dateProchainArrNutr?.toString())
                     }
                 }, year1, month1, day1
             )
-            dpd.getDatePicker().setMaxDate(System.currentTimeMillis());
+            dpd.getDatePicker().setMinDate(System.currentTimeMillis());
             dpd.show()
         }
         /////////////////////////////////// ajouter image ///////////////////////////////////
@@ -166,7 +166,7 @@ class AddActivity : AppCompatActivity() {
                         if ((it.nom1.isEmpty() && it.nom2.isEmpty()) ) {
                             Toast.makeText(this, "Entrez au mois un nom", Toast.LENGTH_SHORT).show()
                         }
-                        else if (it.dateDernierArrSimple==null || it.dateDernierArrNutr==null)
+                        else if (it.dateProchainArrSimple==null || it.dateProchainArrNutr==null)
                         {
                             Toast.makeText(this, "Entrez les dates de dernier arrosage (simple et nutriments", Toast.LENGTH_SHORT).show()
                         }

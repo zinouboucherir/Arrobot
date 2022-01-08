@@ -37,6 +37,6 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
         count.join()
     }
     fun PlantFrequence(date:Int) {
-        Thread { plantFreq.postValue(dao.PlantFrequence(date).toList()) }.start()
+        Thread { plantFreq.postValue(dao.PlantFrequences(date).toList()) }.start()
     }
 }

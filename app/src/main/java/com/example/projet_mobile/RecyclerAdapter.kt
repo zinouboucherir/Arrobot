@@ -6,8 +6,6 @@ import android.graphics.Color
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projet_mobile.databinding.ItemLayoutBinding
 
@@ -34,9 +32,9 @@ class RecycleAdapter(val context: Context,val plantes: MutableList<Plante>): Rec
            holder.binding.frequence.text="* il y a ${plantes[position].nbrFrequence} fréquence pour cette plante"
        }
         holder.binding.addBtn2.setOnClickListener {
-                val intent = Intent(context, AddFrequenceActivity::class.java)
-                intent.putExtra("plante",plantes[position])
-                context.startActivity(intent)
+            val intent = Intent(context, AddFrequenceActivity::class.java)
+            intent.putExtra("plante",plantes[position])
+            context.startActivity(intent)
         }
 
     }

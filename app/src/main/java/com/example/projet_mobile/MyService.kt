@@ -5,6 +5,7 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
 import android.os.IBinder
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -12,7 +13,7 @@ import java.util.*
 
 class MyService : Service() {
     companion object { /* définir les constantes */
-        const val CHANNEL_ID = "message urgent"
+        const val CHANNEL_ID = "channelId"
     }
 
     override fun onCreate() {
@@ -25,25 +26,20 @@ class MyService : Service() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        val t = Thread {
-            val dao = PlanteDB.getDatabase(application).myDao()
-            lateinit var plantFreq: List<FullInfo>
-            val now = Calendar.getInstance()
-            plantFreq = dao.PlantFrequence(now.get(Calendar.MONTH) + 1).toList()
-            plantFreq = plantFreq.filter { it.dateDernierArrNutr?.plusDays((it.Par / it.NbrFois).toLong()) == java.time.LocalDate.now() }
-            if (plantFreq.isNotEmpty()) {
+
+            if (getPlantArroser().isNotEmpty()) {
                 val i = Intent(this, PlantArroseActivity::class.java)
                 intent!!.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 val pendingIntent = PendingIntent.getActivity(this, 0, i, 0)
                 val rington=RingtoneManager.getRingtone(applicationContext,RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE))
                 rington.play()
-                val notification = NotificationCompat.Builder(this, "channelId")
+                val notification = NotificationCompat.Builder(this, CHANNEL_ID)
                         .setContentTitle("ArroBot Notification")
                         .setContentText("Vous avez des plante à arroser aujourduit, cliquer pour les consulter!!")
                         .setContentIntent(pendingIntent)
                         .setAutoCancel(true)
                         .setSmallIcon(R.drawable.ic_launcher_background)
-                        .setPriority(NotificationCompat.PRIORITY_HIGH)
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                         .setAutoCancel(true)
                         .setSmallIcon(R.drawable.logo)
                         .setDefaults(Notification.DEFAULT_SOUND)
@@ -51,9 +47,6 @@ class MyService : Service() {
                 startForeground(1, notification)
                 createNotificationChannel()
             }
-        }
-        t.start()
-        t.join()
         return super.onStartCommand(intent, flags, startId)
     }
     private fun createNotificationChannel() {
@@ -70,5 +63,19 @@ class MyService : Service() {
             val notificationManager = getSystemService(NotificationManager::class.java)
             notificationManager.createNotificationChannel(channel)
         }
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getPlantArroser():List<FullInfo>{
+        val dao = PlanteDB.getDatabase(application).myDao()
+        lateinit var plantFreq: List<FullInfo>
+        val now = Calendar.getInstance()
+        val t=Thread {
+            plantFreq = dao.PlantFrequences(now.get(Calendar.MONTH) + 1).toList()
+            plantFreq = plantFreq.filter { it.dateProchainArrSimple == java.time.LocalDate.now() }
+               // plantFreq.filter { it.dateDernierArrNutr?.plusDays((it.Par / it.NbrFois).toLong()) == java.time.LocalDate.now() }
+        }
+        t.start()
+        t.join()
+        return plantFreq
     }
 }

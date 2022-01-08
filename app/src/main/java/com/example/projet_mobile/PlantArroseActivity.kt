@@ -22,7 +22,7 @@ class PlantArroseActivity : AppCompatActivity() {
         val now = Calendar.getInstance()
         model.PlantFrequence( (now.get(Calendar.MONTH) + 1))
         model.plantFreq.observe(this){
-            val adapter = RecyclerAdapter2(this, it.filter { it.dateDernierArrNutr?.plusDays( (it.Par/it.NbrFois).toLong())==LocalDate.now()}.toMutableList())
+            val adapter = RecyclerAdapter2(this, it.filter { it.dateProchainArrSimple == java.time.LocalDate.now()}.toMutableList())
             binding.recycler2.adapter = adapter
         }
     }
