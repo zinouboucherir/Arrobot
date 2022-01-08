@@ -2,10 +2,8 @@ package com.example.projet_mobile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.room.*
 import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
 import java.sql.Date
 
 @Dao
@@ -33,4 +31,7 @@ interface Dao {
 
     @Query("SELECT * FROM Plante natural join Frequence where :date between MoisDebut and MoisFin")
     fun PlantFrequences(date:Int):Array<FullInfo>
+
+    @Update
+    fun updatePlante(vararg plante: Plante) : Int
 }
