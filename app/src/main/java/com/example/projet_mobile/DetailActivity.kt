@@ -13,16 +13,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
+import com.example.projet_mobile.databinding.ActivityAddBinding
 import com.example.projet_mobile.databinding.ActivityDetailBinding
 import java.io.File
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-
-@RequiresApi(Build.VERSION_CODES.O)
 class DetailActivity : AppCompatActivity() {
-
     var localUri: Uri?=null
     val getContent=registerForActivityResult(ActivityResultContracts.GetContent())
     {
@@ -58,6 +56,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -81,6 +80,7 @@ class DetailActivity : AppCompatActivity() {
             binding.ajouterImage.isEnabled=true
             binding.modifierPlante.isEnabled=false
         }
+
 
         /////////////////////////////////// datepicker for date d'arrosage simple ///////////////////////////////////
         val c = Calendar.getInstance()
@@ -114,8 +114,7 @@ class DetailActivity : AppCompatActivity() {
             dpd.getDatePicker().setMinDate(System.currentTimeMillis());
             dpd.show()
         }
-
-        /////////////////////////////// datepicker for date d'arrosage nutriment ///////////////////////////////////
+/////////////////////////////////// datepicker for date d'arrosage nutriment ///////////////////////////////////
         val c1 = Calendar.getInstance()
         val year1 = c1.get(Calendar.YEAR)
         val month1 = c1.get(Calendar.MONTH)
@@ -149,7 +148,6 @@ class DetailActivity : AppCompatActivity() {
             dpd.getDatePicker().setMinDate(System.currentTimeMillis());
             dpd.show()
         }
-
         binding.ajouterImage.setOnClickListener {
             getContent.launch("image/*")
         }
@@ -185,6 +183,6 @@ class DetailActivity : AppCompatActivity() {
             }
         }
 
-
     }
+
 }

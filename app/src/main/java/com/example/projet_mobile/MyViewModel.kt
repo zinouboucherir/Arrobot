@@ -39,7 +39,6 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
     fun PlantFrequence(date:Int) {
         Thread { plantFreq.postValue(dao.PlantFrequences(date).toList()) }.start()
     }
-
     fun updatePlante(plante: Plante){
         Thread{ dao.updatePlante(plante) }.start()
     }

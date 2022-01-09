@@ -36,6 +36,11 @@ class RecycleAdapter(val context: Context,val plantes: MutableList<Plante>): Rec
             intent.putExtra("plante",plantes[position])
             context.startActivity(intent)
         }
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra("plante",plantes[position])
+            context.startActivity(intent)
+        }
 
     }
     override fun getItemCount(): Int =plantes.size

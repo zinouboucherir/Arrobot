@@ -81,7 +81,6 @@ class AddActivity : AppCompatActivity() {
         var date=""
         var dd=""
         var mm=""
-        lateinit var dateSimple:Date
         binding.arrSimple.setOnClickListener{
 
             val dpd = DatePickerDialog(this,
