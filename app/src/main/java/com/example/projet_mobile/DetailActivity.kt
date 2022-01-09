@@ -1,13 +1,18 @@
 package com.example.projet_mobile
 
 import android.app.DatePickerDialog
+import android.content.Context
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
 import com.example.projet_mobile.databinding.ActivityDetailBinding
+import java.io.File
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -15,6 +20,42 @@ import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.O)
 class DetailActivity : AppCompatActivity() {
+
+    var localUri: Uri?=null
+    val getContent=registerForActivityResult(ActivityResultContracts.GetContent())
+    {
+            uri:Uri?->/*siurinullrienàfaire*/
+        if(uri==null)
+            return@registerForActivityResult
+        /*inputStreamavecl’imagedelaplante*/
+        val inputStream=getContentResolver().openInputStream(uri)
+        /*fabriquerlenomdefichierlocalpourstockerl’image*/
+        val fileNamePrefix="plante"
+        val preferences=getSharedPreferences("numImage", Context.MODE_PRIVATE)
+        val numImage=preferences.getInt("numImage",1)
+        val fileName="$fileNamePrefix$numImage"
+        /*ouvriroutputStreamversunfichierlocal*/
+        val file= File(this.filesDir,fileName)
+        val outputStream=file.outputStream()
+        /* sauvegarder le nouveau compteur d’image */
+        preferences.edit().putInt("numImage",numImage+1).commit()
+        /* copier inputStream qui pointe sur l’image de la galerie * vers le fichier local */
+        inputStream?.copyTo(outputStream)
+        /* mémoriser Uri de fichier local dans la propriété localUri */
+        localUri = file.toUri()
+        outputStream.close()
+        inputStream?.close()
+        //éventuellement afficher l’image dans ImageView
+        val image=findViewById<ImageView>(R.id.planteimage)
+        var modelPlant = ViewModelProvider(this).get(PlantViewModel::class.java)
+        modelPlant.plante.value?.image=localUri.toString()
+        // observer  pour changer l'image à afficher
+        modelPlant.plante.observe(this) {
+            image.setImageURI(modelPlant.plante.value?.image?.toUri())
+        }
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -105,6 +146,10 @@ class DetailActivity : AppCompatActivity() {
             )
             dpd.getDatePicker().setMinDate(System.currentTimeMillis());
             dpd.show()
+        }
+
+        binding.ajouterImage.setOnClickListener {
+            getContent.launch("image/*")
         }
 
 
