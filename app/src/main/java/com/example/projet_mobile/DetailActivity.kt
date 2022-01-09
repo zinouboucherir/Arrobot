@@ -2,11 +2,13 @@ package com.example.projet_mobile
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.net.toUri
@@ -150,6 +152,37 @@ class DetailActivity : AppCompatActivity() {
 
         binding.ajouterImage.setOnClickListener {
             getContent.launch("image/*")
+        }
+
+        binding.sauvgarder.setOnClickListener {
+
+            modelPlant.plante.value?.nom1=binding.nomfr.text.toString()
+            modelPlant.plante.value?.nom2=binding.nomL.text.toString()
+
+
+            val model= ViewModelProvider(this).get(MyViewModel::class.java)
+            modelPlant.plante.observe(this)
+            {
+                // utilisation de view model pour accéder à la fonction d'insertion
+                val model= ViewModelProvider(this).get(MyViewModel::class.java)
+                modelPlant.plante.observe(this) {
+                    if ((it.nom1.isEmpty() && it.nom2.isEmpty()) ) {
+                        Toast.makeText(this, "Entrez au mois un nom", Toast.LENGTH_SHORT).show()
+                    }
+                    else if (it.dateProchainArrSimple==null || it.dateProchainArrNutr==null)
+                    {
+                        Toast.makeText(this, "Entrez les dates de dernier arrosage (simple et nutriments", Toast.LENGTH_SHORT).show()
+                    }
+                    else
+                    {
+                        model.updatePlante(modelPlant.plante.value!!)
+                        Toast.makeText(this, "Plante modifiée avec succées", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
+
+            }
         }
 
 
