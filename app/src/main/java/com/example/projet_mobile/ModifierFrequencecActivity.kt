@@ -1,49 +1,41 @@
 package com.example.projet_mobile
 
+import android.R
+import android.app.AlertDialog
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.SystemClock
-import android.text.TextUtils.join
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
-import androidx.core.view.get
 import androidx.lifecycle.ViewModelProvider
-import com.example.projet_mobile.databinding.ActivityAddFrequenceBinding
-import kotlinx.coroutines.NonCancellable.join
-import kotlinx.coroutines.awaitAll
-import kotlin.properties.Delegates
+import com.example.projet_mobile.databinding.ActivityListeFrequenceBinding
+import com.example.projet_mobile.databinding.ActivityModifierFrequencecBinding
 
-
-class AddFrequenceActivity : AppCompatActivity() {
-
-
+class ModifierFrequencecActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityAddFrequenceBinding.inflate(layoutInflater)
+        val binding = ActivityModifierFrequencecBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //récupérer les information de la plante séléctionné
-        binding.addFrequence.isEnabled=false
         val i = intent
-        val plante: Plante? = i.getSerializableExtra("plante") as Plante?
-        binding.textView4.text = "Fréquence de ${plante?.nom1}"
-
-        //utilisé viewModel pour stocké les information de la fréquence
+        val frequence: Frequence? = i.getSerializableExtra("frequence") as Frequence?
         var modelFrequence = ViewModelProvider(this).get(FrequenceViewModel::class.java)
+        modelFrequence.frequence.setValue(frequence)
+        binding.nbFois.setText(modelFrequence.frequence.value?.NbrFois.toString())
+        binding.periode.setText(modelFrequence.frequence.value?.Par.toString())
+        binding.debutMois.setSelection(modelFrequence.frequence.value?.MoisDebut!!)
+        binding.finMois.setSelection(modelFrequence.frequence.value?.MoisFin!!)
+        binding.addFrequence.isEnabled=false
 
-        //la liste des mois
         val months = arrayListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
-        //le mois de début
-        binding.debutMois.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, months)
+        binding.debutMois.adapter = ArrayAdapter(this, R.layout.simple_list_item_1, months)
         binding.debutMois.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
             ) {
                 modelFrequence.frequence.value?.MoisDebut = months.get(position)
             }
@@ -53,13 +45,13 @@ class AddFrequenceActivity : AppCompatActivity() {
             }
         }
         //le mois de la fin
-        binding.finMois.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, months)
+        binding.finMois.adapter = ArrayAdapter(this, R.layout.simple_list_item_1, months)
         binding.finMois.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
             ) {
 
                 modelFrequence.frequence.value?.MoisFin = months.get(position)
@@ -70,12 +62,14 @@ class AddFrequenceActivity : AppCompatActivity() {
 
             }
         }
+
         var a=true
         binding.verifer.setOnClickListener {
+            binding.addFrequence.isEnabled=true
             val model = ViewModelProvider(this).get(MyViewModel::class.java)
             //verifier si l'intervalle est valide (y a au plus une fréquence dans cet intervale )
-            model.verifiertersectdesPeriode(modelFrequence.frequence.value?.planteId!!, modelFrequence.frequence.value?.MoisDebut!!, modelFrequence.frequence.value?.MoisFin!!)
-            model.listFreqIntersect.observe(this){
+            model.verifyIbtersectForUpdate(modelFrequence.frequence.value?.planteId!!, modelFrequence.frequence.value?.MoisDebut!!, modelFrequence.frequence.value?.MoisFin!!,modelFrequence.frequence.value?.FrequenceId!!)
+            model.listFreqIntersectForUpdate.observe(this){
                 a=it.toMutableList().isEmpty()
             }
             modelFrequence.frequence.observe(this){
@@ -99,8 +93,6 @@ class AddFrequenceActivity : AppCompatActivity() {
 
         }
 
-
-        modelFrequence.frequence.value?.planteId = plante?.planteId!!
         binding.addFrequence.setOnClickListener {
 
             modelFrequence.frequence.value?.NbrFois = binding.nbFois.text.toString().toInt()
@@ -115,22 +107,34 @@ class AddFrequenceActivity : AppCompatActivity() {
             }
             else
             {
-                binding.addFrequence.isEnabled=false
                 val model = ViewModelProvider(this).get(MyViewModel::class.java)
-                model.insertFrequence(modelFrequence.frequence.value!!)
-                model.augmenterNbrFreq(plante.planteId!!)
-                binding.nbFois.text?.clear()
-                binding.periode.text?.clear()
-                binding.debutMois.setSelection(0)
-                binding.finMois.setSelection(0)
-                binding.nbFois.isEnabled=true
-                binding.periode.isEnabled=true
-                binding.debutMois.isEnabled=true
-                binding.finMois.isEnabled=true
-                binding.verifer.isEnabled=true
-                Toast.makeText(this, "Frequence inséré avec succées", Toast.LENGTH_SHORT).show()
-
+                model.updateFreqence(modelFrequence.frequence.value!!)
+                Toast.makeText(this, "Frequence modifier avec succées", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, ListeFrequenceActivity::class.java)
+                intent.putExtra("idPlante",frequence?.planteId)
+                finish()
+                startActivity(intent)
             }
         }
+        binding.deleteFrequence.setOnClickListener {
+            AlertDialog.Builder(this)
+                    .setMessage("vous voulez supprimer cette fréquence?")
+                    .setCancelable(false)
+                    .setPositiveButton("OK") { d, _ ->
+                        val model = ViewModelProvider(this).get(MyViewModel::class.java)
+                        model.deleteFreqence(modelFrequence.frequence.value!!)
+                        model.diminierNbrFreq(frequence?.planteId!!)
+                        Toast.makeText(this, "Frequence supprimer avec succées", Toast.LENGTH_SHORT).show()
+                        d.dismiss()
+                        val intent = Intent(this, ListeFrequenceActivity::class.java)
+                        intent.putExtra("idPlante",frequence?.planteId)
+                        finish()
+                        startActivity(intent)
+                    }
+                    .setNegativeButton("NON") { d, _ -> d.dismiss() }
+                    .show()
+        }
+
+
     }
 }

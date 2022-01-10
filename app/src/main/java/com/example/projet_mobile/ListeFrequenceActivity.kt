@@ -19,6 +19,10 @@ class ListeFrequenceActivity : AppCompatActivity() {
         val model= ViewModelProvider(this).get(MyViewModel::class.java)
         val i = intent
         val idPlante: Int=i.getIntExtra("idPlante",0)
-        
+        model.allFrequenceOfPlant(idPlante)
+        model.allFrequenceOfplant.observe(this){
+            adapter = RecycleAdapter3(this,it.toMutableList())
+            binding.recycler3.adapter = adapter
+        }
     }
 }

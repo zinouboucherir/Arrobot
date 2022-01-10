@@ -73,6 +73,15 @@ class AddActivity : AppCompatActivity() {
         setContentView(binding.root)
         // use viewmodel pour stocker les données d'une plante
         var modelPlant = ViewModelProvider(this).get(PlantViewModel::class.java)
+        binding.nom1.setText(modelPlant.plante.value?.nom1)
+        binding.nom2.setText(modelPlant.plante.value?.nom2)
+        binding.dateSimple.text=modelPlant.plante.value?.dateProchainArrSimple.toString()
+        binding.dateNutr.text=modelPlant.plante.value?.dateProchainArrNutr.toString()
+        binding.planteimage.setImageURI(Uri.parse(modelPlant.plante.value?.image))
+
+
+
+
 /////////////////////////////////// datepicker for date d'arrosage simple ///////////////////////////////////
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
@@ -173,8 +182,11 @@ class AddActivity : AppCompatActivity() {
                         {
                             model.insertPlante(modelPlant.plante.value!!)
                             Toast.makeText(this, "Plante inséré avec succées", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this, MainActivity::class.java)
-                            startActivity(intent)
+                            binding.nom1.text?.clear()
+                            binding.nom2.text?.clear()
+                            binding.dateNutr.setText("Prochain Arrosage nutriment")
+                            binding.dateSimple.setText("Prochain Arrosage simple")
+                            binding.planteimage.setImageResource(R.drawable.plante1)
                         }
                     }
 
