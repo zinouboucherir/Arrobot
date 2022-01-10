@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity
 data class Frequence(
@@ -12,7 +13,7 @@ data class Frequence(
     var MoisDebut:Int,
     var MoisFin:Int,
     var planteId:Int
-)
+):Serializable
 {
     @PrimaryKey(autoGenerate = true)
     var FrequenceId:Int?=null
