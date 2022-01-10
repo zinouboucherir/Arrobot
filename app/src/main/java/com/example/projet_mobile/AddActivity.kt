@@ -94,7 +94,6 @@ class AddActivity : AppCompatActivity() {
                         }
                         date = "$dd-$mm-$mYear"
                         val LocaldateSimple = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                      // dateSimple = Date.from(Instant.from(LocaldateSimple.atStartOfDay(ZoneId.of("GMT"))))
                         // utilisation de view model pour changer la date
                         modelPlant.plante.value?.dateProchainArrSimple=LocaldateSimple
                         // observer  pour changer la date à afficher
@@ -130,7 +129,6 @@ class AddActivity : AppCompatActivity() {
                     }
                     date1 = "$dd1-$mm1-$mYear"
                     val LocaldateNuttr = LocalDate.parse(date1, DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                    //dateNutr = Date.from(Instant.from(LocaldateSimple.atStartOfDay(ZoneId.of("GMT"))))
                     // utilisation de view model pour changer la date
                     modelPlant.plante.value?.dateProchainArrNutr=LocaldateNuttr
                     // observer  pour changer la date à afficher
@@ -166,12 +164,14 @@ class AddActivity : AppCompatActivity() {
                         }
                         else if (it.dateProchainArrSimple==null || it.dateProchainArrNutr==null)
                         {
-                            Toast.makeText(this, "Entrez les dates de dernier arrosage (simple et nutriments", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Entrez les dates de prochains arrosage (simple et nutriments", Toast.LENGTH_SHORT).show()
                         }
                         else
                         {
+                            //insertion
                             model.insertPlante(modelPlant.plante.value!!)
                             Toast.makeText(this, "Plante inséré avec succées", Toast.LENGTH_SHORT).show()
+                            //vider les champs
                             binding.nom1.text?.clear()
                             binding.nom2.text?.clear()
                             binding.dateNutr.setText("Prochain Arrosage nutriment")

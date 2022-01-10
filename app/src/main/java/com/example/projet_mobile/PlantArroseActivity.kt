@@ -21,10 +21,12 @@ class PlantArroseActivity : AppCompatActivity() {
         val model= ViewModelProvider(this).get(MyViewModel::class.java)
         val now = Calendar.getInstance()
         model.PlantFrequence( (now.get(Calendar.MONTH) + 1))
+        // récupérer la liste des plante à arroser aujourd'hui simplement
         model.listFrequenceActuelle.observe(this){
             val adapter = RecyclerAdapter2(this, it.filter { it.dateProchainArrSimple == LocalDate.now() && it.dateProchainArrNutr != LocalDate.now()}.toMutableList())
             binding.recycler2.adapter = adapter
         }
+        // récupérer la liste des plante à arroser aujourd'hui avec nutriments
         binding.recyclerNutr.hasFixedSize() /* pour améliorer les pérformances*/
         binding.recyclerNutr.layoutManager = LinearLayoutManager(this)
         model.listFrequenceActuelle.observe(this){

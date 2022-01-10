@@ -1,6 +1,8 @@
 package com.example.projet_mobile
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -19,35 +21,62 @@ class ConsignesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityConsignesBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //récuperer les différentes informations de la plante à arroser
         val i = intent
         val plantefullInfo: FullInfo? = i.getSerializableExtra("plantefullInfo") as FullInfo?
 
         val model = ViewModelProvider(this).get(MyViewModel::class.java)
+
+        //arroser la plante
         binding.arroser.setOnClickListener {
-            if (plantefullInfo?.dateProchainArrNutr==LocalDate.now())
-            {
-                model.updateDateArrosageNutr(plantefullInfo?.planteId!!,plantefullInfo.dateProchainArrNutr?.plusDays((plantefullInfo.Par*plantefullInfo.FrequenceNutrr/ plantefullInfo.NbrFois).toLong())!!,true)
-            }
-            if (plantefullInfo?.dateProchainArrSimple==LocalDate.now())
-            {
-                model.updateDateArrosage(plantefullInfo?.planteId!!,plantefullInfo.dateProchainArrSimple?.plusDays((plantefullInfo.Par/ plantefullInfo.NbrFois).toLong())!!,true)
-            }
-            Toast.makeText(this, "arrosage effectuer avec succées ! ", Toast.LENGTH_SHORT).show()
+
+            AlertDialog.Builder(this)
+                    .setMessage("vous voulez arroser cette plante?")
+                    .setCancelable(false)
+                    .setPositiveButton("OK") { d, _ ->
+                        if (plantefullInfo?.dateProchainArrNutr==LocalDate.now()) //verifier s'il s'agit d'un arrosage avec nutriments et on mis à jour la date de prochain arrosage avec nutriments
+                        {
+                            model.updateDateArrosageNutr(plantefullInfo?.planteId!!,plantefullInfo.dateProchainArrNutr?.plusDays((plantefullInfo.Par*plantefullInfo.FrequenceNutrr/ plantefullInfo.NbrFois).toLong())!!,true)
+                        }
+                        if (plantefullInfo?.dateProchainArrSimple==LocalDate.now())//verifier s'il s'agit d'un arrosage simple et on mis à jour la date de prochain arrosage simple
+                        {
+                            model.updateDateArrosage(plantefullInfo?.planteId!!,plantefullInfo.dateProchainArrSimple?.plusDays((plantefullInfo.Par/ plantefullInfo.NbrFois).toLong())!!,true)
+                        }
+                        Toast.makeText(this, "arrosage effectuer avec succées ! ", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, PlantArroseActivity::class.java)
+                        finish()
+                        startActivity(intent)
+                    }
+                    .setNegativeButton("NON") { d, _ -> d.dismiss() }
+                    .show()
         }
+
+        //ne pas arroser et replanifier le prochain arrosage automatiquement
         binding.newDateAut.setOnClickListener {
-            if (plantefullInfo?.dateProchainArrNutr==LocalDate.now())
-            {
-                model.updateDateArrosageNutr(plantefullInfo?.planteId!!,plantefullInfo.dateProchainArrNutr?.plusDays((plantefullInfo.Par*plantefullInfo.FrequenceNutrr/ plantefullInfo.NbrFois).toLong())!!,false)
-            }
-            if (plantefullInfo?.dateProchainArrSimple==LocalDate.now())
-            {
-                model.updateDateArrosage(plantefullInfo?.planteId!!,plantefullInfo.dateProchainArrSimple?.plusDays((plantefullInfo.Par/ plantefullInfo.NbrFois).toLong())!!,false)
-            }
+            AlertDialog.Builder(this)
+                    .setMessage("vous ne voulez pas arroser cette plante ?")
+                    .setCancelable(false)
+                    .setPositiveButton("OK") { d, _ ->
+                        if (plantefullInfo?.dateProchainArrNutr==LocalDate.now()) //verifier s'il s'agit d'un arrosage avec nutriments et on mis à jour la date de prochain arrosage avec nutriments
+                        {
+                            model.updateDateArrosageNutr(plantefullInfo?.planteId!!,plantefullInfo.dateProchainArrNutr?.plusDays((plantefullInfo.Par*plantefullInfo.FrequenceNutrr/ plantefullInfo.NbrFois).toLong())!!,false)
+                        }
+                        if (plantefullInfo?.dateProchainArrSimple==LocalDate.now())//verifier s'il s'agit d'un arrosage simple et on mis à jour la date de prochain arrosage simple
+                        {
+                            model.updateDateArrosage(plantefullInfo?.planteId!!,plantefullInfo.dateProchainArrSimple?.plusDays((plantefullInfo.Par/ plantefullInfo.NbrFois).toLong())!!,false)
+                        }
 
-            Toast.makeText(this, "arrosage planifier automatiquement ! ", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "arrosage planifier automatiquement ! ", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, PlantArroseActivity::class.java)
+                        finish()
+                        startActivity(intent)
+                    }
+                    .setNegativeButton("NON") { d, _ -> d.dismiss() }
+                    .show()
         }
 
-
+        //replanifier l'arrosage avec datePicker
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
@@ -68,18 +97,26 @@ class ConsignesActivity : AppCompatActivity() {
                         }
                         date = "$dd-$mm-$mYear"
                         val LocaldateSimple = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                        // dateSimple = Date.from(Instant.from(LocaldateSimple.atStartOfDay(ZoneId.of("GMT"))))
-                        // utilisation de view model pour changer la date
-                        if (plantefullInfo?.dateProchainArrNutr== LocalDate.now())
-                        {
-                            model.updateDateArrosageNutr(plantefullInfo?.planteId!!,LocaldateSimple,false)
-                        }
-                        if(plantefullInfo?.dateProchainArrSimple== LocalDate.now())
-                        {
-                            model.updateDateArrosage(plantefullInfo?.planteId!!,LocaldateSimple,false)
-                        }
-                        Toast.makeText(this, "arrosage replanifier avec succées  ! ", Toast.LENGTH_SHORT).show()
 
+                        AlertDialog.Builder(this)
+                                .setMessage("vous voulez replanifierl'arrosage dans la date choisi ?")
+                                .setCancelable(false)
+                                .setPositiveButton("OK") { d, _ ->
+                                    if (plantefullInfo?.dateProchainArrNutr== LocalDate.now()) //verifier s'il s'agit d'un arrosage avec nutriments et on mis à jour la date de prochain arrosage avec nutriments
+                                    {
+                                        model.updateDateArrosageNutr(plantefullInfo?.planteId!!,LocaldateSimple,false)
+                                    }
+                                    if(plantefullInfo?.dateProchainArrSimple== LocalDate.now()) //verifier s'il s'agit d'un arrosage simple et on mis à jour la date de prochain arrosage simple
+                                    {
+                                        model.updateDateArrosage(plantefullInfo?.planteId!!,LocaldateSimple,false)
+                                    }
+                                    Toast.makeText(this, "arrosage replanifier avec succées  ! ", Toast.LENGTH_SHORT).show()
+                                    val intent = Intent(this, PlantArroseActivity::class.java)
+                                    finish()
+                                    startActivity(intent)
+                                }
+                                .setNegativeButton("NON") { d, _ -> d.dismiss() }
+                                .show()
 
                     }, year, month, day
             )

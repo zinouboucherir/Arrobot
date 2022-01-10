@@ -18,7 +18,7 @@ import java.util.*
 import java.util.jar.Manifest
 
 class AlarmActivity : AppCompatActivity() {
-    var calendar=Calendar.getInstance()
+    var calendar=Calendar.getInstance() //la date et l'heure d'aujourd'hui
     private lateinit var alarmManager:AlarmManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +26,7 @@ class AlarmActivity : AppCompatActivity() {
         val binding = ActivityAlarmBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.FOREGROUND_SERVICE)  ,PackageManager.PERMISSION_GRANTED)
+
         binding.timePicker.setOnTimeChangedListener { view, hourOfDay, minute ->
             calendar[Calendar.HOUR_OF_DAY]=hourOfDay
             calendar[Calendar.MINUTE]=minute
@@ -50,8 +51,10 @@ class AlarmActivity : AppCompatActivity() {
     }
 
     private fun setAlarm() {
+        //lancer le service MyService
         val intent=Intent(this,MyService::class.java)
         val pendingIntent = PendingIntent.getService(this,0, intent,PendingIntent.FLAG_IMMUTABLE)
+        //programer une alarm qui se déclencehe chauqe jour à l'heure choisi par l'utilisateur
         alarmManager=getSystemService(ALARM_SERVICE) as AlarmManager
         alarmManager.setInexactRepeating(
              AlarmManager.RTC_WAKEUP,calendar.timeInMillis,

@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         val model= ViewModelProvider(this).get(MyViewModel::class.java)
         model.allPlante()
         model.allPlante.observe(this){
-            adapter = RecycleAdapter(this,it.toMutableList())
+            adapter = RecycleAdapter(this,it.toMutableList())   //remplire la liste des plantes
             binding.recyclerView.adapter = adapter
         }
 
@@ -61,16 +61,16 @@ class MainActivity : AppCompatActivity() {
         })
 
         binding.addBtn.setOnClickListener {
-            val intent = Intent(this, AddActivity::class.java)
+            val intent = Intent(this, AddActivity::class.java) //aller à l'activiter de l'ajout d'une plante
             startActivity(intent)
         }
         binding.arrBtn.setOnClickListener {
-            val intent = Intent(this, PlantArroseActivity::class.java)
+            val intent = Intent(this, PlantArroseActivity::class.java) //aller à l'activiter des plantes à arroser aujourd'hui
             startActivity(intent)
         }
         binding.instalAlarm.setOnClickListener {
             val intent = Intent(this, AlarmActivity::class.java)
-            startActivity(intent)
+            startActivity(intent)  //aller à l'activité d'installation de l'alarm
         }
     }
 }

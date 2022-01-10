@@ -13,7 +13,7 @@ import java.util.*
 
 class MyService : Service() {
     companion object { /* définir les constantes */
-        const val CHANNEL_ID = "channelId"
+        const val CHANNEL_ID = "channelId"  //id of channel
     }
 
     override fun onCreate() {
@@ -26,13 +26,14 @@ class MyService : Service() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-
+            // si il y a des plantes à arroser alors créer une notofocation
             if (getPlantArroser().isNotEmpty()) {
                 val i = Intent(this, PlantArroseActivity::class.java)
                 intent!!.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 val pendingIntent = PendingIntent.getActivity(this, 0, i, 0)
-                val rington=RingtoneManager.getRingtone(applicationContext,RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE))
+                val rington=RingtoneManager.getRingtone(applicationContext,RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)) //pour le son
                 rington.play()
+                //build of notification
                 val notification = NotificationCompat.Builder(this, CHANNEL_ID)
                         .setContentTitle("ArroBot Notification")
                         .setContentText("Vous avez des plante à arroser aujourduit, cliquer pour les consulter!!")
@@ -49,9 +50,7 @@ class MyService : Service() {
             }
         return super.onStartCommand(intent, flags, startId)
     }
-    private fun createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
+    private fun createNotificationChannel() { //creer notification channel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name: CharSequence = getString(R.string.channel_name)
             val description = getString(R.string.channel_description)
@@ -65,7 +64,7 @@ class MyService : Service() {
         }
     }
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun getPlantArroser():List<FullInfo>{
+    private fun getPlantArroser():List<FullInfo>{ //cette fonction récupére la miste des plantes à arroser chque jour
         val dao = PlanteDB.getDatabase(application).myDao()
         lateinit var plantFreq: List<FullInfo>
         val now = Calendar.getInstance()

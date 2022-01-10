@@ -178,7 +178,7 @@
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <Button
-                    android:id="@+id/ajouterImage"
+                    android:id="@+id/modifierImage"
                     android:layout_width="171dp"
                     android:layout_height="35dp"
                     android:layout_marginTop="8dp"
@@ -210,7 +210,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ajouterImage"
+                    app:layout_constraintTop_toBottomOf="@+id/modifierImage"
                     app:layout_constraintVertical_bias="0.100000024" />
 
 

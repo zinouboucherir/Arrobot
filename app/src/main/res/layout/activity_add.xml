@@ -167,7 +167,7 @@
                     android:src="@drawable/plante1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ajouterImage"
+                    app:layout_constraintTop_toBottomOf="@+id/modifierImage"
                     tools:srcCompat="@tools:sample/avatars" />
 
 

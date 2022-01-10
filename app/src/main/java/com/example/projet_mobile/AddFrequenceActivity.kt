@@ -36,7 +36,7 @@ class AddFrequenceActivity : AppCompatActivity() {
 
         //la liste des mois
         val months = arrayListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
-        //le mois de début
+        //le mois de début de saison
         binding.debutMois.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, months)
         binding.debutMois.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -52,7 +52,7 @@ class AddFrequenceActivity : AppCompatActivity() {
 
             }
         }
-        //le mois de la fin
+        //le mois de la fin de saison
         binding.finMois.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, months)
         binding.finMois.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -109,6 +109,7 @@ class AddFrequenceActivity : AppCompatActivity() {
             modelFrequence.frequence.value?.FrequenceNutrr=binding.freqNuttr.text.toString().toInt()
             if (!a) {
                 Toast.makeText(this,"intervelle croise un autre exite déja !!", Toast.LENGTH_SHORT).show()
+                //redonner l amain à l'utilisateur pour modifier les information saisi
                 binding.addFrequence.isEnabled=false
                 binding.nbFois.isEnabled=true
                 binding.periode.isEnabled=true
@@ -118,14 +119,18 @@ class AddFrequenceActivity : AppCompatActivity() {
             }
             else
             {
+                //ajout de fréquence
                 binding.addFrequence.isEnabled=false
                 val model = ViewModelProvider(this).get(MyViewModel::class.java)
                 model.insertFrequence(modelFrequence.frequence.value!!)
                 model.augmenterNbrFreq(plante.planteId!!)
+                //vider les chapms pour un nouveau ajout
                 binding.nbFois.text?.clear()
                 binding.periode.text?.clear()
                 binding.debutMois.setSelection(0)
                 binding.finMois.setSelection(0)
+                binding.freqNuttr.text?.clear()
+                //redonner l amain à l'utilisateur pour modifier les information saisi
                 binding.nbFois.isEnabled=true
                 binding.periode.isEnabled=true
                 binding.debutMois.isEnabled=true

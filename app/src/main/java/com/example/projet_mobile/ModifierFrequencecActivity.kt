@@ -18,16 +18,20 @@ class ModifierFrequencecActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityModifierFrequencecBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //récupérer la fréquence à modifier
         val i = intent
         val frequence: Frequence? = i.getSerializableExtra("frequence") as Frequence?
         var modelFrequence = ViewModelProvider(this).get(FrequenceViewModel::class.java)
+
         modelFrequence.frequence.setValue(frequence)
+        //initialisation avec les informations de la fréquence
         binding.nbFois.setText(modelFrequence.frequence.value?.NbrFois.toString())
         binding.periode.setText(modelFrequence.frequence.value?.Par.toString())
-        binding.debutMois.setSelection(modelFrequence.frequence.value?.MoisDebut!!)
-        binding.finMois.setSelection(modelFrequence.frequence.value?.MoisFin!!)
+        binding.moisDeb.setText("Mois Debut de saison: ${modelFrequence.frequence.value?.MoisDebut}" )
+        binding.moisF.setText("Mois Fin de saison: ${modelFrequence.frequence.value?.MoisFin}" )
         binding.addFrequence.isEnabled=false
         binding.freqNuttr.setText(modelFrequence.frequence.value?.FrequenceNutrr.toString()!!)
+        //la liste des moins
         val months = arrayListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
         binding.debutMois.adapter = ArrayAdapter(this, R.layout.simple_list_item_1, months)
         binding.debutMois.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

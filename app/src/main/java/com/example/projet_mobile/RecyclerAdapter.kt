@@ -43,7 +43,8 @@ class RecycleAdapter(val context: Context,val plantes: MutableList<Plante>): Rec
         }
         if(!plantes[position].arrose)
         {
-            holder.binding.cardview.setCardBackgroundColor(Color.parseColor("#FF0000"))
+            holder.binding.nePaArroser.text="ne pas arroser"
+            holder.binding.nePaArroser.setTextColor(Color.parseColor("#FF716E"))
         }
 
     }

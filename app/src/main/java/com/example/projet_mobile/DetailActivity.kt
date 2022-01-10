@@ -62,9 +62,13 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //récupérer la plante
         val i = intent
         val plante: Plante? = i.getSerializableExtra("plante") as Plante?
+
         var modelPlant = ViewModelProvider(this).get(PlantViewModel::class.java)
+
+        //utilisation de view model et initialisation avec les informations de la plante
         modelPlant.plante.setValue(plante)
         binding.nomfr.setText(modelPlant.plante.value?.nom1)
         binding.nomL.setText(modelPlant.plante.value?.nom2)
@@ -76,7 +80,7 @@ class DetailActivity : AppCompatActivity() {
         binding.nomL.isEnabled = modelPlant.isenable.value!!
         binding.arrSimple.isEnabled = modelPlant.isenable.value!!
         binding.arrNutr.isEnabled = modelPlant.isenable.value!!
-        binding.ajouterImage.isEnabled = modelPlant.isenable.value!!
+        binding.modifierImage.isEnabled = modelPlant.isenable.value!!
         binding.modifierPlante.isEnabled = !modelPlant.isenable.value!!
         binding.modifierPlante.setOnClickListener {
             modelPlant.isenable.setValue(binding.modifierPlante.isEnabled)
@@ -85,7 +89,7 @@ class DetailActivity : AppCompatActivity() {
             binding.nomL.isEnabled = modelPlant.isenable.value!!
             binding.arrSimple.isEnabled = modelPlant.isenable.value!!
             binding.arrNutr.isEnabled = modelPlant.isenable.value!!
-            binding.ajouterImage.isEnabled = modelPlant.isenable.value!!
+            binding.modifierImage.isEnabled = modelPlant.isenable.value!!
             binding.modifierPlante.isEnabled = !modelPlant.isenable.value!!
         }
 
@@ -144,7 +148,6 @@ class DetailActivity : AppCompatActivity() {
                     }
                     date1 = "$dd1-$mm1-$mYear"
                     val LocaldateNuttr = LocalDate.parse(date1, DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                    //dateNutr = Date.from(Instant.from(LocaldateSimple.atStartOfDay(ZoneId.of("GMT"))))
                     // utilisation de view model pour changer la date
                     modelPlant.plante.value?.dateProchainArrNutr=LocaldateNuttr
                     // observer  pour changer la date à afficher
@@ -156,10 +159,11 @@ class DetailActivity : AppCompatActivity() {
             dpd.getDatePicker().setMinDate(System.currentTimeMillis());
             dpd.show()
         }
-        binding.ajouterImage.setOnClickListener {
+        //modifier l'image
+        binding.modifierImage.setOnClickListener {
             getContent.launch("image/*")
         }
-
+        // sauvgarder les modifications
         binding.sauvgarder.setOnClickListener {
 
             modelPlant.plante.value?.nom1=binding.nomfr.text.toString()
@@ -168,7 +172,7 @@ class DetailActivity : AppCompatActivity() {
 
             modelPlant.plante.observe(this)
             {
-                // utilisation de view model pour accéder à la fonction d'insertion
+
                 val model= ViewModelProvider(this).get(MyViewModel::class.java)
                 modelPlant.plante.observe(this) {
                     if ((it.nom1.isEmpty() && it.nom2.isEmpty()) ) {
@@ -180,6 +184,7 @@ class DetailActivity : AppCompatActivity() {
                     }
                     else
                     {
+                        //update plante
                         model.updatePlante(modelPlant.plante.value!!)
                         Toast.makeText(this, "Plante modifiée avec succées", Toast.LENGTH_SHORT).show()
                         modelPlant.isenable.setValue(binding.modifierPlante.isEnabled!!)
@@ -188,7 +193,7 @@ class DetailActivity : AppCompatActivity() {
                         binding.nomL.isEnabled = modelPlant.isenable.value!!
                         binding.arrSimple.isEnabled = modelPlant.isenable.value!!
                         binding.arrNutr.isEnabled = modelPlant.isenable.value!!
-                        binding.ajouterImage.isEnabled = modelPlant.isenable.value!!
+                        binding.modifierImage.isEnabled = modelPlant.isenable.value!!
                         binding.modifierPlante.isEnabled = !modelPlant.isenable.value!!
 
                     }

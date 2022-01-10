@@ -17,6 +17,7 @@ class ListeFrequenceActivity : AppCompatActivity() {
         binding.recycler3.hasFixedSize() /* pour améliorer les pérformances*/
         binding.recycler3.layoutManager = LinearLayoutManager(this)
         val model= ViewModelProvider(this).get(MyViewModel::class.java)
+        //récupérer l'id de la plante pour afficher leur fréquences
         val i = intent
         val idPlante: Int=i.getIntExtra("idPlante",0)
         model.allFrequenceOfPlant(idPlante)

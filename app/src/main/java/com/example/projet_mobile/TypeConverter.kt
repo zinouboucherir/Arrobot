@@ -7,18 +7,6 @@ import java.time.LocalDate
 import java.util.*
 
 class TypeConverter {
-    @TypeConverter
-    fun fromTimestamp(value: Long?): Date? {
-        return value?.let { Date(it) }
-    }
-    @TypeConverter
-    fun dateToTimestamp(date: Date?): Long? {
-        return if (date == null) {
-            null
-        } else {
-            date.getTime()
-        }
-    }
     @RequiresApi(Build.VERSION_CODES.O)
     @TypeConverter
     fun toDate(dateString: String?): LocalDate? {
