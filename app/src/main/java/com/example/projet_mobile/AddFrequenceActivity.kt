@@ -106,7 +106,7 @@ class AddFrequenceActivity : AppCompatActivity() {
 
             modelFrequence.frequence.value?.NbrFois = binding.nbFois.text.toString().toInt()
             modelFrequence.frequence.value?.Par=binding.periode.text.toString().toInt()
-            binding.freqNuttr.isEnabled=false
+            modelFrequence.frequence.value?.FrequenceNutrr=binding.freqNuttr.text.toString().toInt()
             if (!a) {
                 Toast.makeText(this,"intervelle croise un autre exite déja !!", Toast.LENGTH_SHORT).show()
                 binding.addFrequence.isEnabled=false

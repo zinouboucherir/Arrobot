@@ -25,7 +25,7 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
             }.start()
         }
     }
-    fun partialNomPays(nom: String) {
+    fun partialNomPlante(nom: String) {
         Thread {certainsPlante.postValue(dao.loadPartialNamePlant(nom).toList()) }.start()
     }
     fun insertPlante(plante: Plante) {

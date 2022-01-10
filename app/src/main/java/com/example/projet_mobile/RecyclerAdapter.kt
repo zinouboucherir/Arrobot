@@ -31,7 +31,7 @@ class RecycleAdapter(val context: Context,val plantes: MutableList<Plante>): Rec
            holder.binding.frequence.setTextColor(Color.parseColor("#4D82EA"))
            holder.binding.frequence.text="* il y a ${plantes[position].nbrFrequence} fréquence pour cette plante"
        }
-        holder.binding.addBtn2.setOnClickListener {
+        holder.binding.addFreq.setOnClickListener {
             val intent = Intent(context, AddFrequenceActivity::class.java)
             intent.putExtra("plante",plantes[position])
             context.startActivity(intent)

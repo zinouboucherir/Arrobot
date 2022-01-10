@@ -6,9 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"> <!--IMPORTANT otherwise backgrnd img. will not fill the whole screen -->
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/b5"
@@ -98,7 +96,7 @@
                     android:hapticFeedbackEnabled="false"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Modifier"
+                    android:text="Prochian arrosae simple"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/dateSimple"
@@ -137,7 +135,7 @@
                     android:hapticFeedbackEnabled="false"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Modifier"
+                    android:text="Prochain arrosage avce nutriments"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/dateNutr"

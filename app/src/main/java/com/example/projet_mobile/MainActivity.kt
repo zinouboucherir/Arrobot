@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         lateinit var adapter: RecycleAdapter
         binding.recyclerView.hasFixedSize() /* pour améliorer les pérformances*/
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
             adapter = RecycleAdapter(this,it.toMutableList())
             binding.recyclerView.adapter = adapter
         }
+
         binding.search.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(
                 s: CharSequence, start: Int, before: Int,
@@ -50,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable) {
-                model.partialNomPays(s.toString())
+                model.partialNomPlante(s.toString())
                 model.certainsPlante.observe(this@MainActivity) {
                     adapter = RecycleAdapter(this@MainActivity,it.toMutableList())
                     binding.recyclerView.adapter = adapter
