@@ -1,176 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/b5"
-    tools:context=".AddFrequenceActivity">
+    android:fillViewport="true"> <!--IMPORTANT otherwise backgrnd img. will not fill the whole screen -->
 
-    <Button
-        android:id="@+id/addFrequence"
-        android:layout_width="149dp"
-        android:layout_height="46dp"
-        android:background="@drawable/roundstyle"
-        android:drawableLeft="@drawable/ic_add_white"
-        android:fontFamily="@font/nunito_light"
-        android:hapticFeedbackEnabled="false"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
-        android:text="Ajouter"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/b5"
+        tools:context=".AddFrequenceActivity">
 
-    <androidx.cardview.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        card_view:cardBackgroundColor="#00FFFFFF"
-        card_view:cardCornerRadius="15dp"
-        android:id="@+id/cardView"
-        android:layout_width="353dp"
-        android:layout_height="583dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        <Button
+            android:id="@+id/addFrequence"
+            android:layout_width="149dp"
+            android:layout_height="46dp"
+            android:background="@drawable/roundstyle"
+            android:drawableLeft="@drawable/ic_add_white"
+            android:fontFamily="@font/nunito_light"
+            android:hapticFeedbackEnabled="false"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:text="Ajouter"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="612dp"
-            android:background="#D9FFFFFF">
+        <androidx.cardview.widget.CardView
+            app:cardBackgroundColor="#00FFFFFF"
+            app:cardCornerRadius="15dp"
+            android:id="@+id/cardView"
+            android:layout_width="353dp"
+            android:layout_height="583dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="612dp"
+                android:background="#D9FFFFFF">
 
 
-            <Button
-                android:id="@+id/verifer"
-                android:layout_width="158dp"
-                android:layout_height="33dp"
-                android:layout_marginBottom="80dp"
-                android:background="@drawable/roundstyle"
-                android:drawableLeft="@drawable/ic_baseline_check_circle_24"
-                android:fontFamily="@font/nunito_light"
-                android:hapticFeedbackEnabled="false"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:text="j'ai tout saisi"
-                android:textColor="#FFFFFF"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/finMois"
-                app:layout_constraintHorizontal_bias="0.51"
-                app:layout_constraintStart_toStartOf="@+id/finMois"
-                app:layout_constraintTop_toBottomOf="@+id/finMois"
-                app:layout_constraintVertical_bias="0.7" />
+                <Button
+                    android:id="@+id/verifer"
+                    android:layout_width="158dp"
+                    android:layout_height="33dp"
+                    android:layout_marginBottom="80dp"
+                    android:background="@drawable/roundstyle"
+                    android:drawableLeft="@drawable/ic_baseline_check_circle_24"
+                    android:fontFamily="@font/nunito_light"
+                    android:hapticFeedbackEnabled="false"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:text="j'ai tout saisi"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/finMois"
+                    app:layout_constraintHorizontal_bias="0.503"
+                    app:layout_constraintStart_toStartOf="@+id/finMois"
+                    app:layout_constraintTop_toBottomOf="@+id/text3"
+                    app:layout_constraintVertical_bias="0.83" />
 
-            <Spinner
-                android:id="@+id/debutMois"
-                android:layout_width="309dp"
-                android:layout_height="48dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.476"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dateNutr3" />
+                <Spinner
+                    android:id="@+id/debutMois"
+                    android:layout_width="309dp"
+                    android:layout_height="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.476"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/dateNutr3" />
 
-            <Spinner
-                android:id="@+id/finMois"
-                android:layout_width="309dp"
-                android:layout_height="48dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.476"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dateSimple3" />
+                <Spinner
+                    android:id="@+id/finMois"
+                    android:layout_width="309dp"
+                    android:layout_height="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.476"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/dateSimple3" />
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/nunito_light"
-                android:text="Fréquence d'arrosage"
-                android:textSize="30sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/text"
-                android:layout_width="290dp"
-                android:layout_height="54dp"
-                android:layout_marginTop="76dp"
-                android:hint="Nombre de fois"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/nbFois"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_extralight"
-                    android:inputType="number"
-                    android:padding="12dp"
-                    android:textColorLink="#2E6A9D" />
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/nunito_light"
+                    android:text="Fréquence d'arrosage"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text"
+                    android:layout_width="290dp"
+                    android:layout_height="54dp"
+                    android:layout_marginTop="76dp"
+                    android:hint="Nombre de fois"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/nbFois"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_extralight"
+                        android:inputType="number"
+                        android:padding="12dp"
+                        android:textColorLink="#2E6A9D" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text3"
+                    android:layout_width="290dp"
+                    android:layout_height="54dp"
+                    android:hint="Multiplicité de fréquence nutriments"
+                    app:layout_constraintEnd_toEndOf="@+id/finMois"
+                    app:layout_constraintHorizontal_bias="0.526"
+                    app:layout_constraintStart_toStartOf="@+id/finMois"
+                    app:layout_constraintTop_toBottomOf="@+id/finMois">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/freqNuttr"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_extralight"
+                        android:inputType="number"
+                        android:padding="12dp"
+                        android:textColorLink="#2E6A9D" />
 
 
-            </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/text2"
-                android:layout_width="290dp"
-                android:layout_height="54dp"
-                android:layout_marginTop="8dp"
-                android:hint="Par combien de jour "
-                app:layout_constraintEnd_toEndOf="@+id/text"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/text"
-                app:layout_constraintTop_toBottomOf="@+id/text">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text2"
+                    android:layout_width="290dp"
+                    android:layout_height="54dp"
+                    android:layout_marginTop="8dp"
+                    android:hint="Par combien de jour "
+                    app:layout_constraintEnd_toEndOf="@+id/text"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/text"
+                    app:layout_constraintTop_toBottomOf="@+id/text">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/periode"
-                    android:layout_width="match_parent"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/periode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_extralight"
+                        android:inputType="number"
+                        android:padding="12dp"
+                        android:textColorLink="#2E6A9D" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_extralight"
-                    android:inputType="number"
-                    android:padding="12dp"
-                    android:textColorLink="#2E6A9D" />
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/nunito_light"
+                    android:text="Choisir la saison "
+                    app:layout_constraintStart_toStartOf="@+id/debutMois"
+                    app:layout_constraintTop_toBottomOf="@+id/text2" />
 
+                <TextView
+                    android:id="@+id/dateSimple3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_light"
+                    android:text="Mois Fin de saison "
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/debutMois" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:id="@+id/dateNutr3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/nunito_light"
+                    android:text="Mois Début de saison "
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/nunito_light"
-                android:text="Choisir la saison "
-                app:layout_constraintStart_toStartOf="@+id/debutMois"
-                app:layout_constraintTop_toBottomOf="@+id/text2" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/dateSimple3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nunito_light"
-                android:text="Mois Fin de saison "
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/debutMois" />
-
-            <TextView
-                android:id="@+id/dateNutr3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/nunito_light"
-                android:text="Mois Début de saison "
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

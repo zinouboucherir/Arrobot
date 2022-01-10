@@ -71,15 +71,22 @@ class DetailActivity : AppCompatActivity() {
         binding.dateSimple.text=modelPlant.plante.value?.dateProchainArrSimple.toString()
         binding.dateNutr.text=modelPlant.plante.value?.dateProchainArrNutr.toString()
         binding.planteimage.setImageURI(Uri.parse(modelPlant.plante.value?.image))
-        binding.sauvgarder.isEnabled=false
+        binding.sauvgarder.isEnabled = modelPlant.isenable.value!!
+        binding.nomfr.isEnabled = modelPlant.isenable.value!!
+        binding.nomL.isEnabled = modelPlant.isenable.value!!
+        binding.arrSimple.isEnabled = modelPlant.isenable.value!!
+        binding.arrNutr.isEnabled = modelPlant.isenable.value!!
+        binding.ajouterImage.isEnabled = modelPlant.isenable.value!!
+        binding.modifierPlante.isEnabled = !modelPlant.isenable.value!!
         binding.modifierPlante.setOnClickListener {
-            binding.sauvgarder.isEnabled=true
-            binding.nomfr.isEnabled=true
-            binding.nomL.isEnabled=true
-            binding.arrSimple.isEnabled=true
-            binding.arrNutr.isEnabled=true
-            binding.ajouterImage.isEnabled=true
-            binding.modifierPlante.isEnabled=false
+            modelPlant.isenable.setValue(binding.modifierPlante.isEnabled)
+            binding.sauvgarder.isEnabled = modelPlant.isenable.value!!
+            binding.nomfr.isEnabled = modelPlant.isenable.value!!
+            binding.nomL.isEnabled = modelPlant.isenable.value!!
+            binding.arrSimple.isEnabled = modelPlant.isenable.value!!
+            binding.arrNutr.isEnabled = modelPlant.isenable.value!!
+            binding.ajouterImage.isEnabled = modelPlant.isenable.value!!
+            binding.modifierPlante.isEnabled = !modelPlant.isenable.value!!
         }
 
 
@@ -175,13 +182,15 @@ class DetailActivity : AppCompatActivity() {
                     {
                         model.updatePlante(modelPlant.plante.value!!)
                         Toast.makeText(this, "Plante modifiée avec succées", Toast.LENGTH_SHORT).show()
-                        binding.sauvgarder.isEnabled=false
-                        binding.nomfr.isEnabled=false
-                        binding.nomL.isEnabled=false
-                        binding.arrSimple.isEnabled=false
-                        binding.arrNutr.isEnabled=false
-                        binding.ajouterImage.isEnabled=false
-                        binding.modifierPlante.isEnabled=true
+                        modelPlant.isenable.setValue(binding.modifierPlante.isEnabled!!)
+                        binding.sauvgarder.isEnabled = modelPlant.isenable.value!!
+                        binding.nomfr.isEnabled = modelPlant.isenable.value!!
+                        binding.nomL.isEnabled = modelPlant.isenable.value!!
+                        binding.arrSimple.isEnabled = modelPlant.isenable.value!!
+                        binding.arrNutr.isEnabled = modelPlant.isenable.value!!
+                        binding.ajouterImage.isEnabled = modelPlant.isenable.value!!
+                        binding.modifierPlante.isEnabled = !modelPlant.isenable.value!!
+
                     }
                 }
 

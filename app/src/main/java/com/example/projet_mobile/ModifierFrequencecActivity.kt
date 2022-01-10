@@ -27,7 +27,7 @@ class ModifierFrequencecActivity : AppCompatActivity() {
         binding.debutMois.setSelection(modelFrequence.frequence.value?.MoisDebut!!)
         binding.finMois.setSelection(modelFrequence.frequence.value?.MoisFin!!)
         binding.addFrequence.isEnabled=false
-
+        binding.freqNuttr.setText(modelFrequence.frequence.value?.FrequenceNutrr.toString()!!)
         val months = arrayListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
         binding.debutMois.adapter = ArrayAdapter(this, R.layout.simple_list_item_1, months)
         binding.debutMois.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -88,6 +88,7 @@ class ModifierFrequencecActivity : AppCompatActivity() {
                     binding.periode.isEnabled=false
                     binding.debutMois.isEnabled=false
                     binding.finMois.isEnabled=false
+                    binding.freqNuttr.isEnabled=false
                 }
             }
 
@@ -97,6 +98,7 @@ class ModifierFrequencecActivity : AppCompatActivity() {
 
             modelFrequence.frequence.value?.NbrFois = binding.nbFois.text.toString().toInt()
             modelFrequence.frequence.value?.Par=binding.periode.text.toString().toInt()
+            modelFrequence.frequence.value?.FrequenceNutrr=binding.freqNuttr.text.toString().toInt()
             if (!a) {
                 Toast.makeText(this,"intervelle croise un autre exite déja !!", Toast.LENGTH_SHORT).show()
                 binding.addFrequence.isEnabled=false
@@ -104,6 +106,7 @@ class ModifierFrequencecActivity : AppCompatActivity() {
                 binding.periode.isEnabled=true
                 binding.debutMois.isEnabled=true
                 binding.finMois.isEnabled=true
+                binding.freqNuttr.isEnabled=true
             }
             else
             {

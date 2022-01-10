@@ -39,7 +39,6 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/nunito_light"
                 android:text="Entre le mois :"
-                android:textColor="#82B2BD"
                 android:textSize="18sp"
                 card_view:layout_constraintEnd_toEndOf="@+id/chaque"
                 card_view:layout_constraintHorizontal_bias="0.0"
@@ -69,7 +68,6 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/nunito_light"
                 android:text="et  le mois:"
-                android:textColor="#82B2BD"
                 android:textSize="18sp"
                 card_view:layout_constraintStart_toEndOf="@+id/moisDebut"
                 card_view:layout_constraintTop_toBottomOf="@+id/chaque" />
@@ -120,7 +118,6 @@
                 android:layout_marginLeft="8dp"
                 android:fontFamily="@font/nunito_light"
                 android:text="Jours"
-                android:textColor="#82B2BD"
                 android:textSize="18sp"
                 card_view:layout_constraintStart_toEndOf="@+id/chaque"
                 card_view:layout_constraintTop_toTopOf="parent" />
@@ -133,15 +130,15 @@
                 android:layout_marginLeft="8dp"
                 android:fontFamily="@font/nunito_light"
                 android:text="Fois par :"
-                android:textColor="#82B2BD"
                 android:textSize="18sp"
                 card_view:layout_constraintStart_toEndOf="@+id/par"
                 card_view:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/modifier"
-                android:layout_width="32dp"
-                android:layout_height="27dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/ic_baseline_edit_24_2"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent" />

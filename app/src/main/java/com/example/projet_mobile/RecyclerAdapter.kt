@@ -41,6 +41,10 @@ class RecycleAdapter(val context: Context,val plantes: MutableList<Plante>): Rec
             intent.putExtra("plante",plantes[position])
             context.startActivity(intent)
         }
+        if(!plantes[position].arrose)
+        {
+            holder.binding.cardview.setCardBackgroundColor(Color.parseColor("#FF0000"))
+        }
 
     }
     override fun getItemCount(): Int =plantes.size

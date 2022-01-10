@@ -12,7 +12,8 @@ data class Frequence(
     var Par:Int,
     var MoisDebut:Int,
     var MoisFin:Int,
-    var planteId:Int
+    var planteId:Int,
+    var FrequenceNutrr:Int
 ):Serializable
 {
     @PrimaryKey(autoGenerate = true)

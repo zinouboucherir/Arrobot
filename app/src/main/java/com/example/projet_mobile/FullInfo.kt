@@ -17,6 +17,7 @@ class FullInfo(
     var Par:Int,
     var MoisDebut:Int,
     var MoisFin:Int,
+    var FrequenceNutrr:Int
     ):Serializable
 {
 

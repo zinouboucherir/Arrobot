@@ -22,7 +22,7 @@ class RecyclerAdapter2(val context: Context,val plantes: MutableList<FullInfo>):
         holder.binding.imageView4.setImageURI(Uri.parse(plantes[position].image))
         holder.binding.detail.setOnClickListener {
             val intent = Intent(context, ConsignesActivity::class.java)
-            intent.putExtra("planteArroser",plantes[position])
+            intent.putExtra("plantefullInfo",plantes[position])
             context.startActivity(intent)
         }
 

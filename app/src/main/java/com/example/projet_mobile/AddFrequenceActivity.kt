@@ -79,7 +79,7 @@ class AddFrequenceActivity : AppCompatActivity() {
                 a=it.toMutableList().isEmpty()
             }
             modelFrequence.frequence.observe(this){
-                if (binding.nbFois.text?.isEmpty()!! || binding.periode.text?.isEmpty()!!)
+                if (binding.nbFois.text?.isEmpty()!! || binding.periode.text?.isEmpty()!! || binding.freqNuttr.text?.isEmpty()!!)
                 {
                     Toast.makeText(this,"Assurer que tout les informations sans saisi!", Toast.LENGTH_SHORT).show()
                 }
@@ -94,6 +94,7 @@ class AddFrequenceActivity : AppCompatActivity() {
                     binding.periode.isEnabled=false
                     binding.debutMois.isEnabled=false
                     binding.finMois.isEnabled=false
+                    binding.freqNuttr.isEnabled=false
                 }
             }
 
@@ -105,6 +106,7 @@ class AddFrequenceActivity : AppCompatActivity() {
 
             modelFrequence.frequence.value?.NbrFois = binding.nbFois.text.toString().toInt()
             modelFrequence.frequence.value?.Par=binding.periode.text.toString().toInt()
+            binding.freqNuttr.isEnabled=false
             if (!a) {
                 Toast.makeText(this,"intervelle croise un autre exite déja !!", Toast.LENGTH_SHORT).show()
                 binding.addFrequence.isEnabled=false
@@ -112,6 +114,7 @@ class AddFrequenceActivity : AppCompatActivity() {
                 binding.periode.isEnabled=true
                 binding.debutMois.isEnabled=true
                 binding.finMois.isEnabled=true
+                binding.freqNuttr.isEnabled=true
             }
             else
             {
@@ -128,6 +131,7 @@ class AddFrequenceActivity : AppCompatActivity() {
                 binding.debutMois.isEnabled=true
                 binding.finMois.isEnabled=true
                 binding.verifer.isEnabled=true
+                binding.freqNuttr.isEnabled=true
                 Toast.makeText(this, "Frequence inséré avec succées", Toast.LENGTH_SHORT).show()
 
             }

@@ -75,11 +75,11 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
     fun deleteFreqence(frequence: Frequence){
         Thread{ dao.deleteFrequence(frequence) }.start()
     }
-    fun updateDateArrosage(id:Int,date: LocalDate) {
-        Thread { dao.updateDateArrosage(id,date) }.start()
+    fun updateDateArrosage(id:Int,date: LocalDate,arrose:Boolean) {
+        Thread { dao.updateDateArrosage(id,date,arrose) }.start()
     }
-    fun updateDateArrosageNutr(id:Int,date: LocalDate) {
-        Thread { dao.updateDateArrosageNutr(id,date) }.start()
+    fun updateDateArrosageNutr(id:Int,date: LocalDate,arrose:Boolean) {
+        Thread { dao.updateDateArrosageNutr(id,date,arrose) }.start()
     }
     fun deletePlante(plante:Plante){
         Thread {dao.deletePlant(plante)}.start()

@@ -51,11 +51,11 @@ interface Dao {
     @Delete
     fun deleteFrequence( vararg frequence: Frequence) : Int
 
-    @Query("UPDATE Plante SET dateProchainArrSimple=:date WHERE planteId = :id")
-    fun updateDateArrosage(id: Int,date: LocalDate)
+    @Query("UPDATE Plante SET dateProchainArrSimple=:date,arrose=:arrose WHERE planteId = :id")
+    fun updateDateArrosage(id: Int,date: LocalDate,arrose:Boolean)
 
-    @Query("UPDATE Plante SET dateProchainArrNutr=:date WHERE planteId = :id")
-    fun updateDateArrosageNutr(id: Int,date: LocalDate)
+    @Query("UPDATE Plante SET dateProchainArrNutr=:date,arrose=:arrose WHERE planteId = :id")
+    fun updateDateArrosageNutr(id: Int,date: LocalDate,arrose:Boolean)
 
     @Delete
     fun deletePlant( vararg plante: Plante) : Int

@@ -24,19 +24,26 @@ class ConsignesActivity : AppCompatActivity() {
 
         val model = ViewModelProvider(this).get(MyViewModel::class.java)
         binding.arroser.setOnClickListener {
-            if (plantefullInfo?.dateProchainArrNutr==plantefullInfo?.dateProchainArrSimple)
+            if (plantefullInfo?.dateProchainArrNutr==LocalDate.now())
             {
-                model.updateDateArrosageNutr(plantefullInfo?.planteId!!,plantefullInfo.dateProchainArrNutr?.plusDays((plantefullInfo.Par*3/ plantefullInfo.NbrFois).toLong())!!)
+                model.updateDateArrosageNutr(plantefullInfo?.planteId!!,plantefullInfo.dateProchainArrNutr?.plusDays((plantefullInfo.Par*plantefullInfo.FrequenceNutrr/ plantefullInfo.NbrFois).toLong())!!,true)
             }
-            model.updateDateArrosage(plantefullInfo?.planteId!!,plantefullInfo.dateProchainArrSimple?.plusDays((plantefullInfo.Par/ plantefullInfo.NbrFois).toLong())!!)
+            if (plantefullInfo?.dateProchainArrSimple==LocalDate.now())
+            {
+                model.updateDateArrosage(plantefullInfo?.planteId!!,plantefullInfo.dateProchainArrSimple?.plusDays((plantefullInfo.Par/ plantefullInfo.NbrFois).toLong())!!,true)
+            }
             Toast.makeText(this, "arrosage effectuer avec succées ! ", Toast.LENGTH_SHORT).show()
         }
         binding.newDateAut.setOnClickListener {
-            if (plantefullInfo?.dateProchainArrNutr==plantefullInfo?.dateProchainArrSimple)
+            if (plantefullInfo?.dateProchainArrNutr==LocalDate.now())
             {
-                model.updateDateArrosageNutr(plantefullInfo?.planteId!!,plantefullInfo.dateProchainArrNutr?.plusDays((plantefullInfo.Par*3/ plantefullInfo.NbrFois).toLong())!!)
+                model.updateDateArrosageNutr(plantefullInfo?.planteId!!,plantefullInfo.dateProchainArrNutr?.plusDays((plantefullInfo.Par*plantefullInfo.FrequenceNutrr/ plantefullInfo.NbrFois).toLong())!!,false)
             }
-            model.updateDateArrosage(plantefullInfo?.planteId!!,plantefullInfo.dateProchainArrSimple?.plusDays((plantefullInfo.Par/ plantefullInfo.NbrFois).toLong())!!)
+            if (plantefullInfo?.dateProchainArrSimple==LocalDate.now())
+            {
+                model.updateDateArrosage(plantefullInfo?.planteId!!,plantefullInfo.dateProchainArrSimple?.plusDays((plantefullInfo.Par/ plantefullInfo.NbrFois).toLong())!!,false)
+            }
+
             Toast.makeText(this, "arrosage planifier automatiquement ! ", Toast.LENGTH_SHORT).show()
         }
 
@@ -63,11 +70,14 @@ class ConsignesActivity : AppCompatActivity() {
                         val LocaldateSimple = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"))
                         // dateSimple = Date.from(Instant.from(LocaldateSimple.atStartOfDay(ZoneId.of("GMT"))))
                         // utilisation de view model pour changer la date
-                        if (plantefullInfo?.dateProchainArrNutr==plantefullInfo?.dateProchainArrSimple)
+                        if (plantefullInfo?.dateProchainArrNutr== LocalDate.now())
                         {
-                            model.updateDateArrosageNutr(plantefullInfo?.planteId!!,LocaldateSimple)
+                            model.updateDateArrosageNutr(plantefullInfo?.planteId!!,LocaldateSimple,false)
                         }
-                        model.updateDateArrosage(plantefullInfo?.planteId!!,LocaldateSimple)
+                        if(plantefullInfo?.dateProchainArrSimple== LocalDate.now())
+                        {
+                            model.updateDateArrosage(plantefullInfo?.planteId!!,LocaldateSimple,false)
+                        }
                         Toast.makeText(this, "arrosage replanifier avec succées  ! ", Toast.LENGTH_SHORT).show()
 
 
