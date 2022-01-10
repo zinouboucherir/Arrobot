@@ -169,6 +169,7 @@ class AddActivity : AppCompatActivity() {
                         else
                         {
                             //insertion
+                                modelPlant.plante.value?.arrose=true
                             model.insertPlante(modelPlant.plante.value!!)
                             Toast.makeText(this, "Plante inséré avec succées", Toast.LENGTH_SHORT).show()
                             //vider les champs

@@ -43,7 +43,7 @@ class RecycleAdapter(val context: Context,val plantes: MutableList<Plante>): Rec
         }
         if(!plantes[position].arrose)
         {
-            holder.binding.nePaArroser.text="ne pas arroser"
+            holder.binding.nePaArroser.text="n'est pas arrosé"
             holder.binding.nePaArroser.setTextColor(Color.parseColor("#FF716E"))
         }
 

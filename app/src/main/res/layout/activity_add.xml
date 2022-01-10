@@ -163,11 +163,12 @@
                     android:id="@+id/planteimage"
                     android:layout_width="356dp"
                     android:layout_height="148dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="32dp"
                     android:src="@drawable/plante1"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/modifierImage"
+                    app:layout_constraintTop_toBottomOf="@+id/arrNutr"
                     tools:srcCompat="@tools:sample/avatars" />
 
 
