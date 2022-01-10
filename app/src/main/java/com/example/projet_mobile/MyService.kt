@@ -70,9 +70,8 @@ class MyService : Service() {
         lateinit var plantFreq: List<FullInfo>
         val now = Calendar.getInstance()
         val t=Thread {
-            plantFreq = dao.PlantFrequences(now.get(Calendar.MONTH) + 1).toList()
+            plantFreq = dao.frequencesDesPlanteActuelleForService(now.get(Calendar.MONTH) + 1).toList()!!
             plantFreq = plantFreq.filter { it.dateProchainArrSimple == java.time.LocalDate.now() }
-               // plantFreq.filter { it.dateDernierArrNutr?.plusDays((it.Par / it.NbrFois).toLong()) == java.time.LocalDate.now() }
         }
         t.start()
         t.join()

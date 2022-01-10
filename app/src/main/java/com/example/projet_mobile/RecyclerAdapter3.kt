@@ -37,3 +37,5 @@ class RecycleAdapter3(val context: Context, val frequences: MutableList<Frequenc
 
 
 }
+
+

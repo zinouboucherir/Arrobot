@@ -1,5 +1,6 @@
 package com.example.projet_mobile
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
@@ -158,7 +159,6 @@ class DetailActivity : AppCompatActivity() {
             modelPlant.plante.value?.nom2=binding.nomL.text.toString()
 
 
-            val model= ViewModelProvider(this).get(MyViewModel::class.java)
             modelPlant.plante.observe(this)
             {
                 // utilisation de view model pour accéder à la fonction d'insertion
@@ -175,12 +175,41 @@ class DetailActivity : AppCompatActivity() {
                     {
                         model.updatePlante(modelPlant.plante.value!!)
                         Toast.makeText(this, "Plante modifiée avec succées", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
+                        binding.sauvgarder.isEnabled=false
+                        binding.nomfr.isEnabled=false
+                        binding.nomL.isEnabled=false
+                        binding.arrSimple.isEnabled=false
+                        binding.arrNutr.isEnabled=false
+                        binding.ajouterImage.isEnabled=false
+                        binding.modifierPlante.isEnabled=true
                     }
                 }
 
             }
+        }
+
+        binding.freq.setOnClickListener {
+            val intent = Intent(this, ListeFrequenceActivity::class.java)
+            intent.putExtra("idPlante",plante?.planteId)
+            startActivity(intent)
+        }
+        binding.deleteFrequence.setOnClickListener {
+            AlertDialog.Builder(this)
+                .setMessage("vous voulez supprimer cette plante?")
+                .setCancelable(false)
+                .setPositiveButton("OK") { d, _ ->
+                    val model= ViewModelProvider(this).get(MyViewModel::class.java)
+                    model.deletePlante(modelPlant.plante.value!!)
+                    model.deletPlantFrequences(modelPlant.plante.value!!.planteId!!)
+                    Toast.makeText(this, "Plante supprimée avec succées", Toast.LENGTH_SHORT).show()
+                    d.dismiss()
+                    val intent = Intent(this, MainActivity::class.java)
+                    finish()
+                    startActivity(intent)
+                }
+                .setNegativeButton("NON") { d, _ -> d.dismiss() }
+                .show()
+
         }
 
     }

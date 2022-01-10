@@ -18,19 +18,19 @@ import java.time.LocalDate
 
 
 class MainActivity : AppCompatActivity() {
-    lateinit var adapter: RecycleAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val recyclerView = findViewById(R.id.recyclerView) as RecyclerView
-        recyclerView.hasFixedSize() /* pour améliorer les pérformances*/
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        lateinit var adapter: RecycleAdapter
+        binding.recyclerView.hasFixedSize() /* pour améliorer les pérformances*/
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
         val model= ViewModelProvider(this).get(MyViewModel::class.java)
         model.allPlante()
         model.allPlante.observe(this){
             adapter = RecycleAdapter(this,it.toMutableList())
-            recyclerView.adapter = adapter
+            binding.recyclerView.adapter = adapter
         }
         binding.search.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                 model.partialNomPays(s.toString())
                 model.certainsPlante.observe(this@MainActivity) {
                     adapter = RecycleAdapter(this@MainActivity,it.toMutableList())
-                    recyclerView.adapter = adapter
+                    binding.recyclerView.adapter = adapter
                 }
             }
         })

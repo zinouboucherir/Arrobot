@@ -21,9 +21,15 @@ class PlantArroseActivity : AppCompatActivity() {
         val model= ViewModelProvider(this).get(MyViewModel::class.java)
         val now = Calendar.getInstance()
         model.PlantFrequence( (now.get(Calendar.MONTH) + 1))
-        model.plantFreq.observe(this){
-            val adapter = RecyclerAdapter2(this, it.filter { it.dateProchainArrSimple == java.time.LocalDate.now()}.toMutableList())
+        model.listFrequenceActuelle.observe(this){
+            val adapter = RecyclerAdapter2(this, it.filter { it.dateProchainArrSimple == LocalDate.now() && it.dateProchainArrNutr != LocalDate.now()}.toMutableList())
             binding.recycler2.adapter = adapter
+        }
+        binding.recyclerNutr.hasFixedSize() /* pour améliorer les pérformances*/
+        binding.recyclerNutr.layoutManager = LinearLayoutManager(this)
+        model.listFrequenceActuelle.observe(this){
+            val adapter = RecyclerAdapter2(this, it.filter { it.dateProchainArrNutr == LocalDate.now()}.toMutableList())
+            binding.recyclerNutr.adapter = adapter
         }
     }
 }

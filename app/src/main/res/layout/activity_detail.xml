@@ -99,6 +99,25 @@
                 app:layout_constraintStart_toStartOf="@+id/dateSimple"
                 app:layout_constraintTop_toBottomOf="@+id/dateSimple" />
 
+
+            <Button
+                android:id="@+id/deleteFrequence"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:background="@drawable/roundstyle"
+                android:drawableLeft="@drawable/ic_baseline_delete_forever_24"
+                android:fontFamily="@font/nunito_light"
+                android:hapticFeedbackEnabled="false"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="@+id/textView8"
+                app:layout_constraintEnd_toStartOf="@+id/textView8"
+                app:layout_constraintHorizontal_bias="0.157"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView8"
+                app:layout_constraintVertical_bias="0.0" />
+
             <Button
                 android:id="@+id/arrNutr"
                 android:layout_width="wrap_content"
@@ -144,9 +163,9 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/planteimage"
-                android:layout_width="356dp"
-                android:layout_height="148dp"
-                android:layout_marginTop="16dp"
+                android:layout_width="351dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="8dp"
                 android:src="@drawable/plante1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -170,6 +189,24 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/planteimage" />
+
+            <Button
+                android:id="@+id/freq"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/roundstyle"
+                android:fontFamily="@font/nunito_light"
+                android:hapticFeedbackEnabled="false"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:text="Consulter les fréquences"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ajouterImage"
+                app:layout_constraintVertical_bias="0.100000024" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
