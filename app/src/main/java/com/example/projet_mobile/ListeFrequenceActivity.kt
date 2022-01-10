@@ -12,6 +12,13 @@ class ListeFrequenceActivity : AppCompatActivity() {
     lateinit var adapter: RecycleAdapter3
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val binding = ActivityListeFrequenceBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.recycler3.hasFixedSize() /* pour améliorer les pérformances*/
+        binding.recycler3.layoutManager = LinearLayoutManager(this)
+        val model= ViewModelProvider(this).get(MyViewModel::class.java)
+        val i = intent
+        val idPlante: Int=i.getIntExtra("idPlante",0)
         
     }
 }

@@ -24,11 +24,7 @@ class RecycleAdapter3(val context: Context, val frequences: MutableList<Frequenc
         holder.binding.moisDebut.text=frequences[position].MoisDebut.toString()
         holder.binding.moisFin.text=frequences[position].MoisFin.toString()
 
-        holder.binding.modifier.setOnClickListener {
-            val intent = Intent(context, ModifierFrequencecActivity::class.java)
-            intent.putExtra("frequence",frequences[position])
-            context.startActivity(intent)
-        }
+
 
     }
     override fun getItemCount(): Int =frequences.size
